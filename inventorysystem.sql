@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-07-2020 a las 00:05:25
+-- Tiempo de generación: 03-07-2020 a las 01:44:26
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.2.31
 
@@ -59,15 +59,13 @@ CREATE TABLE `estado` (
 --
 
 CREATE TABLE `login_usuario` (
+  `id` int(11) NOT NULL,
   `n° documento` int(11) NOT NULL COMMENT 'sr(a) en este campo se guardara el numero de identificcion de la persona',
+  `nombres` varchar(45) COLLATE utf8_spanish_ci NOT NULL COMMENT 'aqui se registraran los nombres de la persona',
+  `apellidos` varchar(45) COLLATE utf8_spanish_ci NOT NULL COMMENT 'aqui se guardara los apellidos de la persona',
+  `contraseña` varchar(255) COLLATE utf8_spanish_ci NOT NULL COMMENT 'aqui se guardara la contraseña asignada',
   `Tip_doc_idTip_doc` int(11) NOT NULL COMMENT 'aqui se guardara la ide del tipo del documento',
-  `contraseña` varchar(45) COLLATE utf8_spanish_ci NOT NULL COMMENT 'aqui se guardara la contraseña asignada',
-  `Rol_idRol` int(11) NOT NULL COMMENT 'en este campo la persona seleccionara el rol a la que pertenece la persona',
-  `1nombre` varchar(45) COLLATE utf8_spanish_ci NOT NULL COMMENT 'aqui se registrara el primer nombre de la persona',
-  `2nombrel` varchar(45) COLLATE utf8_spanish_ci NOT NULL COMMENT 'aqui se guardara el segundo nombre de la persona',
-  `1apellido` varchar(45) COLLATE utf8_spanish_ci NOT NULL COMMENT 'aqui se guardara el primer apellido de la persona',
-  `2apellido` varchar(45) COLLATE utf8_spanish_ci NOT NULL COMMENT 'aqui se guardara el segundo apellido del la persona ',
-  `edad` int(11) NOT NULL COMMENT 'aqui se guardara la edad de la persona'
+  `Rol_idRol` int(11) NOT NULL COMMENT 'en este campo la persona seleccionara el rol a la que pertenece la persona'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
@@ -93,6 +91,14 @@ CREATE TABLE `rol` (
   `idRol` int(11) NOT NULL COMMENT 'se guardara la id del rol de la persona',
   `rol` tinytext COLLATE utf8_spanish_ci NOT NULL COMMENT 'aqui se guardara el rol de las personas y sea administrador o empleado'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `rol`
+--
+
+INSERT INTO `rol` (`idRol`, `rol`) VALUES
+(1, 'Administrador'),
+(2, 'Empleado');
 
 -- --------------------------------------------------------
 
@@ -128,6 +134,15 @@ CREATE TABLE `tip_doc` (
   `idTip_doc` int(11) NOT NULL COMMENT 'sr(a) aqui se guardara el numero de identificacion',
   `descripcion` tinytext COLLATE utf8_spanish_ci NOT NULL COMMENT 'sr(a) en etes campo se guardara el tipo de identficacion ya se a cc,ce,ti,etc.'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `tip_doc`
+--
+
+INSERT INTO `tip_doc` (`idTip_doc`, `descripcion`) VALUES
+(1, 'T.I'),
+(2, 'C.C'),
+(3, 'C.E');
 
 -- --------------------------------------------------------
 
@@ -165,7 +180,8 @@ ALTER TABLE `estado`
 -- Indices de la tabla `login_usuario`
 --
 ALTER TABLE `login_usuario`
-  ADD PRIMARY KEY (`n° documento`),
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `n° documento` (`n° documento`),
   ADD KEY `fk_Login_usuario_Tip_doc1_idx` (`Tip_doc_idTip_doc`),
   ADD KEY `fk_Login_usuario_Rol1_idx` (`Rol_idRol`);
 
@@ -226,6 +242,18 @@ ALTER TABLE `estado`
   MODIFY `idestado` int(11) NOT NULL AUTO_INCREMENT COMMENT 'se guarda la id del estado el producto';
 
 --
+-- AUTO_INCREMENT de la tabla `login_usuario`
+--
+ALTER TABLE `login_usuario`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `rol`
+--
+ALTER TABLE `rol`
+  MODIFY `idRol` int(11) NOT NULL AUTO_INCREMENT COMMENT 'se guardara la id del rol de la persona', AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT de la tabla `salida`
 --
 ALTER TABLE `salida`
@@ -236,6 +264,12 @@ ALTER TABLE `salida`
 --
 ALTER TABLE `tipo_producto`
   MODIFY `idtipo_producto` int(11) NOT NULL AUTO_INCREMENT COMMENT 'en este campo se guarda la id del tipo de producto';
+
+--
+-- AUTO_INCREMENT de la tabla `tip_doc`
+--
+ALTER TABLE `tip_doc`
+  MODIFY `idTip_doc` int(11) NOT NULL AUTO_INCREMENT COMMENT 'sr(a) aqui se guardara el numero de identificacion', AUTO_INCREMENT=4;
 
 --
 -- Restricciones para tablas volcadas
@@ -254,8 +288,8 @@ ALTER TABLE `entradas`
 -- Filtros para la tabla `login_usuario`
 --
 ALTER TABLE `login_usuario`
-  ADD CONSTRAINT `fk_Login_usuario_Rol1` FOREIGN KEY (`Rol_idRol`) REFERENCES `rol` (`idRol`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Login_usuario_Tip_doc1` FOREIGN KEY (`Tip_doc_idTip_doc`) REFERENCES `tip_doc` (`idTip_doc`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `login_usuario_ibfk_1` FOREIGN KEY (`Tip_doc_idTip_doc`) REFERENCES `tip_doc` (`idTip_doc`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `login_usuario_ibfk_2` FOREIGN KEY (`Rol_idRol`) REFERENCES `rol` (`idRol`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
