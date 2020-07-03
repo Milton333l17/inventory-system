@@ -1,5 +1,6 @@
 <?php
-include("layouts/header.php")
+include("layouts/header.php");
+require("controller/conexion.php");
 ?>
 
 <!-- MAIN CONTENT-->
@@ -12,14 +13,14 @@ include("layouts/header.php")
                         <div class="card-header">Registro Nuevo Usuario</div>
                         <div class="card-body">
 
-                            <form action="" method="post" novalidate="novalidate">
+                            <form action="controller/registro.php" method="post" novalidate="novalidate">
                                 <div class="form-group">
                                     <label for="cc-payment" class="control-label mb-1">Nombres</label>
-                                    <input id="cc-pament" name="cc-payment" type="text" class="form-control" aria-required="true" aria-invalid="false">
+                                    <input id="cc-pament" name="nombres" type="text" class="form-control" aria-required="true" aria-invalid="false">
                                 </div>
                                 <div class="form-group">
                                     <label for="cc-payment" class="control-label mb-1">Apellidos</label>
-                                    <input id="cc-pament" name="cc-payment" type="text" class="form-control" aria-required="true" aria-invalid="false">
+                                    <input id="cc-pament" name="apellidos" type="text" class="form-control" aria-required="true" aria-invalid="false">
                                 </div>
 
                                 <div class="row form-group">
@@ -27,10 +28,10 @@ include("layouts/header.php")
                                         <label for="select" class=" form-control-label">Tipo de documento</label>
                                     </div>
                                     <div class="col-12 col-md-8">
-                                        <select name="select" id="select" class="form-control">
-                                            <option value="T.I">T.I</option>
-                                            <option value="C.C">C.C</option>
-                                            <option value="C.E">C.E</option>
+                                        <select name="tipodoc[]" id="select" class="form-control">
+                                            <option value="1">T.I</option>
+                                            <option value="2">C.C</option>
+                                            <option value="3">C.E</option>
 
 
                                         </select>
@@ -39,12 +40,12 @@ include("layouts/header.php")
 
                                 <div class="form-group has-success">
                                     <label for="cc-name" class="control-label mb-1">Documento</label>
-                                    <input id="cc-name" name="cc-name" type="text" class="form-control cc-name valid" data-val="true" data-val-required="Please enter the name on card" autocomplete="cc-name" aria-required="true" aria-invalid="false" aria-describedby="cc-name-error">
+                                    <input id="cc-name" name="documento" type="text" class="form-control cc-name valid" data-val="true" data-val-required="Please enter the name on card" autocomplete="cc-name" aria-required="true" aria-invalid="false" aria-describedby="cc-name-error">
                                     <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
                                 </div>
                                 <div class="form-group">
                                     <label for="cc-number" class="control-label mb-1">Contraseña</label>
-                                    <input id="cc-number" name="cc-number" type="password" class="form-control cc-number identified visa" value="" data-val="true" data-val-required="Please enter the card number" data-val-cc-number="Please enter a valid card number" autocomplete="cc-number">
+                                    <input id="cc-number" name="password" type="password" class="form-control cc-number identified visa" value="" data-val="true" data-val-required="Please enter the card number" data-val-cc-number="Please enter a valid card number" autocomplete="cc-number">
                                     <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
                                 </div>
 
@@ -53,10 +54,12 @@ include("layouts/header.php")
                                         <label for="select" class=" form-control-label">Rol</label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <select name="select" id="select" class="form-control">
-                                            <option value="administrador">Administrador</option>
-                                            <option value="empleado">Empleado</option>
-
+                                        <select name="rol[]" id="select" class="form-control">
+                                        <?php
+                                        foreach($pdo->query('SELECT * from rol') as $fila) {
+                                            <option value="<?php echo $fila["idRol"];?>" ><?php echo $fila["rol"];?> </option> 
+                                        }
+                                        ?>
                                         </select>
                                     </div>
                                 </div>
