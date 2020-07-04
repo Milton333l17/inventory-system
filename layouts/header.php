@@ -10,18 +10,16 @@
     <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
-    <title><?php 
-    
-    
-    if (empty($title)){
-        $title = "Inventory System";
-        echo $title;
-        }
-        
-        else{ 
-             echo $title;
-        }
-       ?></title>
+    <title><?php
+
+
+            if (empty($title)) {
+                $title = "Inventory System";
+                echo $title;
+            } else {
+                echo $title;
+            }
+            ?></title>
 
     <!-- Fontfaces CSS-->
     <link href="css/font-face.css" rel="stylesheet" media="all">
@@ -48,4 +46,8 @@
 
 <body class="animsition">
     <div class="page-wrapper">
-    <?php include ("sidebar.php")?>
+        <?php include("sidebar.php") ?>
+        <!-- MAIN CONTENT-->
+        <div class="main-content">
+            <div class="section__content section__content--p30">
+                <div class="container-fluid">
