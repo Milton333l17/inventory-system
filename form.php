@@ -4,12 +4,16 @@ require('controller/load.php');
 $roles = select_all('rol');
 $tipo_doc = select_all('tip_doc');
 
-
+echo '<div class="card-body">
+<div class="alert alert-primary" role="alert">
+    This is a primary alert with
+    <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
+</div>';
 //Registrar nuevo usuario
 if (isset($_POST['registrar'])) {
-    // $req_fields = array('nombres', 'apellidos', 'password');
-    // validate_fields($req_fields);
-    // print_r($errors);
+    $req_fields = array('nombres', 'apellidos', 'password');
+    validate_fields($req_fields);
+    print_r($errors);
 
     $nombre = $_POST["nombres"];
     $apellidos = $_POST["apellidos"];
@@ -24,6 +28,7 @@ if (isset($_POST['registrar'])) {
     $gsent->execute();
 }
 ?>
+
 <div class="row">
     <div class="col-lg-12">
         <div class="card">
