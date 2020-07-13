@@ -1,6 +1,8 @@
 <?php
 include("layouts/header.php");
 require('controller/load.php');
+$users =select_all('login_usuario');
+
 ?>
 <div class="row">
     <div class="col-lg-12">
@@ -21,35 +23,63 @@ require('controller/load.php');
                 </div>
             </div>
             <div class="table-responsive table-data">
-                <table class="table">
-                    <thead>
+                <table class="table table-striped">
+                    <thead class="thead-dark text-center ">
                         <tr>
-                            <td>Nombre</td>
-                            <td>Rol</td>
-                            <td>Acciones</td>
+                            <th>Nombre   </th>
+                            <th>Apellido </th>
+                            <th>Documento</th>
+                            <th>Gmail    </th>
+                            <th>Rol      </th>
+                            <th>Actividad</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>
-                                <div class="table-data__info">
-                                    <h6>lori lynch</h6>
-                                    <span>
-                                        <a href="#">johndoe@gmail.com</a>
-                                    </span>
-                                </div>
-                            </td>
-                            <td>
-                                <span class="role admin">admin</span>
-                            </td>
-                            <td>
-                                <!-- botones -->
-                                <button type="button" class="btn btn-secondary">Desactivar</button>
-                                <button type="button" class="btn btn-success">Modificar</button>
-                            </td>
-                        </tr> 
-                    </tbody>  
-                </table>         
+                       <?php 
+                       foreach($users as $user): ?>
+
+                        <tr class="text-center">
+                        
+                            <td> <?php  echo $user['nombres'] ?> </p></td>
+                            <td><?php  echo $user['apellidos'];     ?></td>
+                            <td><?php  echo $user['n°documento'];?></td>
+                            <td><?php    echo $user['email'];    ?></td>
+                            <td><?php  if($user['Rol_idRol'] === '1'){
+                               echo '<span class="role admin">Administrador</span>';
+                            }else{
+                                echo '<span class="role user">Empleado</span>';
+                            }      ?></td>
+                            <td><div class="table-data-feature"> <?php   if($user['estado'] === '1'){
+                                echo '<button class="item" data-toggle="tooltip" data-placement="top" title="Active">
+                                <i class="zmdi zmdi-mood"></i>
+                                </button>';}
+                                else{
+                                echo '<button class="item" data-toggle="tooltip" data-placement="top" title="Inactive">
+                                <i class="zmdi zmdi-mood-bad"></i>
+                                </button>';
+                                }?>
+
+                                                    
+                                                        
+                                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
+                                                            <i class="zmdi zmdi-edit"></i>
+                                                        </button>
+                                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Delete">
+                                                            <i class="zmdi zmdi-delete"></i>
+                                                        </button>
+                                                       
+                                                 
+                                                </td>    </div>
+                        </tr>
+                         
+                    <?php endforeach; ?>
+                        
+                        
+                            
+    
+
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -57,5 +87,5 @@ require('controller/load.php');
 </div>
 </div>
 <?php
-include("layouts/footer.php")
+include("layouts/footer.php");
 ?>
