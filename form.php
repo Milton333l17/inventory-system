@@ -1,6 +1,6 @@
 <?php
-include("layouts/header.php");
 require('controller/load.php');
+include_once("layouts/header.php");
 $roles = select_all('rol');
 $tipo_doc = select_all('tip_doc');
 
@@ -48,7 +48,7 @@ if (isset($_POST['registrar'])) {
             <div class="card-header">Registro Nuevo Usuario</div>
             <div class="card-body">
 
-                <form action="form.php" method="post" >
+                <form action="form.php" method="post">
                     <div class="form-group">
                         <label for="cc-payment" class="control-label mb-1">Nombres</label>
                         <input id="cc-pament" name="nombres" type="text" class="form-control" aria-required="true" aria-invalid="false" required="true">

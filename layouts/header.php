@@ -1,6 +1,3 @@
-<?php
-session_start();
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,16 +11,11 @@ session_start();
 
     <!-- Title Page-->
     <title><?php
-
-
             if (empty($title)) {
                 $title = "Inventory System";
-                echo $title;
-            } else {
-                echo $title;
             }
+            echo $title;
             ?></title>
-S
     <!-- Fontfaces CSS-->
     <link href="css/font-face.css" rel="stylesheet" media="all">
     <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
