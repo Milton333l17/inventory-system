@@ -30,7 +30,7 @@ if (isset($_POST['registrar'])) {
         }else if(verify_email($email)){
             display_msg('warning', 'Email ya existente.');
         }else{
-            $sql = "INSERT INTO login_usuario(n°documento, nombres, apellidos, email, contraseña, Tip_doc_idTip_doc, Rol_idRol) VALUES ({$documento},'{$nombre}','{$apellidos}', '{$email}', '{$contrasena}',{$tipodoc}, {$rol})";
+            $sql = "INSERT INTO login_usuario(documento, nombres, apellidos, email, contraseña, Tip_doc_idTip_doc, Rol_idRol) VALUES ({$documento},'{$nombre}','{$apellidos}', '{$email}', '{$contrasena}',{$tipodoc}, {$rol})";
             if($pdo->query($sql)){
                 display_msg('success', 'Usuario registrado exitosamente!');
             }else{
