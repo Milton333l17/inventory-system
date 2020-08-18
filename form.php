@@ -19,7 +19,7 @@ if (isset($_POST['registrar'])) {
         $nombre = $_POST["nombres"];
         $apellidos = $_POST["apellidos"];
         $contrasena = $_POST["password"];
-        $contrasena = password_hash($contrasena, PASSWORD_DEFAULT);
+        $contrasena = sha1($contrasena);
         $documento = $_POST["documento"];
         $email = $_POST['email'];
         $rol = $_POST["rol"];

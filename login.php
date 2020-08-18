@@ -32,20 +32,20 @@ $title = "Login";
   <link rel="stylesheet" href="css/estilo_login.css">
 </head>
 <body>
-  <form action="#" class="login-form">
+  <form action="auth.php" method="POST" class="login-form">
     <h1>Inventory System</h1>
     <div class="textb">
-      <input type="text" required>
+      <input type="text" name="documento" required>
       <div class="placeholder">Documento</div>
     </div>
 
     <div class="textb">
-      <input type="password" required>
+      <input type="password" name="password" required>
       <div class="placeholder">Contraseña</div>
       <div class="show-password fas fa-eye-slash"></div>
     </div>
 
-    <button class="btn fas fa-arrow-right" ></button>
+    <button type="submit" class="btn fas fa-arrow-right" ></button>
     <p class="text-center">Copyright © 2020 Inventory System.</p>
   </form>
 

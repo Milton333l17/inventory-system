@@ -1,11 +1,8 @@
 <?php
 include("layouts/header.php");
 require('controller/load.php');
-<<<<<<< HEAD
-$users =select_all('login_usuario');
+$users = select_all('login_usuario');
 
-=======
->>>>>>> 98e9394aa027cbac755518ea36ac3fc9314e0c6f
 ?>
 <div class="row">
     <div class="col-lg-12">
@@ -26,7 +23,6 @@ $users =select_all('login_usuario');
                 </div>
             </div>
             <div class="table-responsive table-data">
-<<<<<<< HEAD
                 <table class="table table-striped">
                     <thead class="thead-dark text-center ">
                         <tr>
@@ -46,7 +42,7 @@ $users =select_all('login_usuario');
                         
                             <td> <?php  echo $user['nombres'] ?> </p></td>
                             <td><?php  echo $user['apellidos'];     ?></td>
-                            <td><?php  echo $user['n°documento'];?></td>
+                            <td><?php  echo $user['documento'];?></td>
                             <td><?php    echo $user['email'];    ?></td>
                             <td><?php  if($user['Rol_idRol'] === '1'){
                                echo '<span class="role admin">Administrador</span>';
@@ -84,37 +80,6 @@ $users =select_all('login_usuario');
 
                     </tbody>
                 </table>
-=======
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <td>Nombre</td>
-                            <td>Rol</td>
-                            <td>Acciones</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <div class="table-data__info">
-                                    <h6>lori lynch</h6>
-                                    <span>
-                                        <a href="#">johndoe@gmail.com</a>
-                                    </span>
-                                </div>
-                            </td>
-                            <td>
-                                <span class="role admin">admin</span>
-                            </td>
-                            <td>
-                                <!-- botones -->
-                                <button type="button" class="btn btn-secondary">Desactivar</button>
-                                <button type="button" class="btn btn-success">Modificar</button>
-                            </td>
-                        </tr> 
-                    </tbody>  
-                </table>         
->>>>>>> 98e9394aa027cbac755518ea36ac3fc9314e0c6f
             </div>
         </div>
     </div>
@@ -122,9 +87,5 @@ $users =select_all('login_usuario');
 </div>
 </div>
 <?php
-<<<<<<< HEAD
 include("layouts/footer.php");
-=======
-include("layouts/footer.php")
->>>>>>> 98e9394aa027cbac755518ea36ac3fc9314e0c6f
 ?>

@@ -8,7 +8,7 @@ $errors = array();
 /*--------------------------------------------------------------*/
 function verify_doc($doc){
     global $pdo;
-    $sql = "SELECT n°documento FROM login_usuario WHERE n°documento=$doc";
+    $sql = "SELECT documento FROM login_usuario WHERE documento=$doc";
     $result = $pdo->query($sql);
     if($result->fetchColumn() > 0){
         return true;
@@ -60,4 +60,19 @@ function select_all($table){
     $sql->execute();
     $resultado = $sql->fetchAll();
     return $resultado;
+}
+
+
+function select_user($user_id){
+    global $pdo;
+    $sql = $pdo->prepare('Select * from login_usuario WHERE id='.$user_id);
+    $sql->execute();
+    $resultado = $sql->fetchAll();
+    return $resultado; 
+}
+
+function current_user(){
+    global $pdo;
+    $user = select_user($_SESSION['user_id']);
+    return $user;
 }

@@ -1,3 +1,7 @@
+ <?php 
+    require_once('controller/load.php');
+    $user = current_user();
+ ?>
  <!-- HEADER MOBILE-->
 <header class="header-mobile d-block d-lg-none">
             <div class="header-mobile__bar">
@@ -284,7 +288,9 @@
                                             <img src="images/icon/avatar-01.jpg" alt="John Doe" />
                                         </div>
                                         <div class="content">
-                                            <a class="js-acc-btn" href="#">john doe</a>
+                                            <a class="js-acc-btn" href="#"><?php 
+                                            print(json_encode($user[0]['nombres']));
+                                            ?></a>
                                         </div>
                                         <div class="account-dropdown js-dropdown">
                                             <div class="info clearfix">
