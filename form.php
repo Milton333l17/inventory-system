@@ -1,61 +1,73 @@
 <?php
-require('controller/load.php');
-include_once("layouts/header.php");
-$roles = select_all('rol');
-$tipo_doc = select_all('tip_doc');
+require_once('controller/load.php');
+
+$roles = find_all('rol');
+$tipo_doc = find_all('tip_doc');
 
 //Registrar nuevo usuario
 if (isset($_POST['registrar'])) {
-    $req_fields = array('nombres', 'apellidos', 'documento', 'password');
+    $req_fields = array('nombres', 'apellidos', 'documento', 'email', 'password');
     validate_fields($req_fields);
-    if(empty($_POST['rol'])){
-        display_msg('danger', 'Seleccione el rol.');
-    }
-    if(empty($_POST['tipodoc'])){
-        display_msg('danger', 'Selecione el tipo de docuemnto.');
-    }
     
     if(empty($errors)){
         $nombre = $_POST["nombres"];
         $apellidos = $_POST["apellidos"];
-        $contrasena = $_POST["password"];
-        $contrasena = sha1($contrasena);
+        $contrasena = password_hash($_POST["password"], PASSWORD_DEFAULT);
         $documento = $_POST["documento"];
         $email = $_POST['email'];
         $rol = $_POST["rol"];
         $tipodoc = $_POST["tipodoc"];
 
-        if(verify_doc($documento)){
-            display_msg('warning', 'Documento ya existente.');
-        }else if(verify_email($email)){
-            display_msg('warning', 'Email ya existente.');
-        }else{
-            $sql = "INSERT INTO login_usuario(documento, nombres, apellidos, email, contraseña, Tip_doc_idTip_doc, Rol_idRol) VALUES ({$documento},'{$nombre}','{$apellidos}', '{$email}', '{$contrasena}',{$tipodoc}, {$rol})";
-            if($pdo->query($sql)){
-                display_msg('success', 'Usuario registrado exitosamente!');
-            }else{
-                display_msg('danger', 'Error al crear el usuario.');
-            }
+        if(!isset($rol)){
+            $session->msg("d", "Rol no puede estar en blanco.");
+            redirect('form.php', false);
         }
+
+        if(!isset($tipo_doc)){
+            $session->msg("d", "Tipo de documento no puede estar en blanco.");
+            redirect('form.php', false);
+        }
+
+        if(verify_doc($documento)){
+            $session->msg("w", "Documento ya existente.");
+            redirect('form.php', false);
+        }
+
+        if(verify_email($email)){
+            $session->msg("w", "Email ya existente.");
+            redirect('form.php', false);
+        }
+
+        $sql = "INSERT INTO login_usuario(documento, nombres, apellidos, email, password, tip_doc_id, rol_id) VALUES ({$documento},'{$nombre}','{$apellidos}', '{$email}', '{$contrasena}',{$tipodoc}, {$rol})";
+        if($pdo->query($sql)){
+            $session->msg("s", 'Usuario registrado exitosamente!');
+            redirect('usuarios.php', false);
+        }else{
+            $session->msg("d", 'Error al crear el usuario.');
+            redirect('usuarios.php', false);
+        }
+
+    }else{
+        $session->msg("d", $errors);
+        redirect('form.php', false);
     }
 }
-
+include_once("layouts/header.php");
 ?>
-
 <div class="row">
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">Registro Nuevo Usuario</div>
+	        <?php echo display_msg($msg); ?>
             <div class="card-body">
-
-                <form action="form.php" method="post">
+                <form action="form.php" method="POST">
                     <div class="form-group">
                         <label for="cc-payment" class="control-label mb-1">Nombres</label>
-                        <input id="cc-pament" name="nombres" type="text" class="form-control" aria-required="true" aria-invalid="false" required="true">
+                        <input id="cc-pament" name="nombres" type="text" class="form-control"  aria-invalid="false" >
                     </div>
                     <div class="form-group">
                         <label for="cc-payment" class="control-label mb-1">Apellidos</label>
-                        <input id="cc-pament" name="apellidos" type="text" class="form-control" aria-required="true" aria-invalid="false" required>
+                        <input id="cc-pament" name="apellidos" type="text" class="form-control aria-invalid="false" >
                     </div>
 
                     <div class="row form-group">
@@ -63,7 +75,7 @@ if (isset($_POST['registrar'])) {
                             <label for="select" class=" form-control-label">Tipo de documento</label>
                         </div>
                         <div class="col-12 col-md-8">
-                            <select name="tipodoc" id="select" class="form-control" required>
+                            <select name="tipodoc" id="select" class="form-control" >
                                 <option value="">Selecione el tipo de documento</option>
                                 <?php foreach ($tipo_doc as $doc) : ?>
                                     <option value="<?php echo $doc['idTip_doc'] ?>">
@@ -76,18 +88,18 @@ if (isset($_POST['registrar'])) {
 
                     <div class="form-group has-success">
                         <label for="cc-name" class="control-label mb-1">Documento</label>
-                        <input id="cc-name" name="documento" type="text" class="form-control cc-documento" required>
-                        <span class="help-block field-validation-valid" data-valmsg-for="cc-documento" data-valmsg-replace="true" required></span>
+                        <input id="cc-name" name="documento" type="text" class="form-control cc-documento" >
+                        <span class="help-block field-validation-valid" data-valmsg-for="cc-documento" data-valmsg-replace="true" ></span>
                     </div>
                     <div class="form-group">
                         <label for="cc-email" class="control-label mb-1">Email</label>
-                        <input id="cc-email" name="email" type="text" class="form-control cc-email valid" required>
-                        <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true" required></span>
+                        <input id="cc-email" name="email" type="text" class="form-control cc-email valid" >
+                        <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true" ></span>
                     </div>
                     <div class="form-group">
                         <label for="cc-number" class="control-label mb-1">Contraseña</label>
-                        <input id="cc-number" name="password" type="password" class="form-control cc-number identified visa" value="" data-val="true" data-val-required="Please enter the card number" data-val-cc-number="Please enter a valid card number" autocomplete="cc-number">
-                        <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true" required></span>
+                        <input id="cc-number" name="password" type="password" class="form-control cc-number identified visa" value="" data-val="true" data-val-="Please enter the card number" data-val-cc-number="Please enter a valid card number" autocomplete="cc-number">
+                        <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true" ></span>
                     </div>
 
                     <div class="row form-group">
@@ -96,7 +108,7 @@ if (isset($_POST['registrar'])) {
                         </div>
                         <div class="col-12 col-md-9">
 
-                            <select name="rol" id="select" class="form-control" required>
+                            <select name="rol" id="select" class="form-control" >
                                 <option value="">Selecione el rol</option>
                                 <?php foreach ($roles as $rol) : ?>
                                     <option value="<?php echo $rol['idRol'] ?>">

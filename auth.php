@@ -1,28 +1,23 @@
-<?php
+<?php 
+include_once('controller/load.php');
+$req_fields = array('documento', 'password' );
+validate_fields($req_fields);
+$username = remove_specials($_POST['documento']);
+$password = remove_specials($_POST['password']);
 
-    require_once('controller/load.php');
-
-    $documento = $_POST['documento'];
-    $password = $_POST['password'];
-    $password = sha1($password);
-
-    $req_fields = array('documento', 'password');
-    validate_fields($req_fields);
-
-    $sql = "SELECT id, documento, contraseña, nombres FROM login_usuario WHERE documento = :doc";
-    $stm = $pdo->prepare($sql);
-    
-    $stm->bindValue(':doc', $documento);
-    $stm->execute();
-    $user = $stm->fetchAll();
-
-    if($password === $user[0]['contraseña']){
-        $_SESSION['user_id'] = $user[0]['id'];
-
-        $session->login($_SESSION['user_id']);
-        header("location: usuarios.php");
-    }else{
-        header("location: login.php");
-    }
-
-?>
+if(empty($errors)){
+  $user_id = authenticate($username, $password);
+  if($user_id){
+        //Crea la sesión con el id
+        $session->login($user_id);
+            
+        $session->msg("s", "Bienvenido!");
+        redirect('form.php',false);
+  }else{
+    $session->msg("d", "Documento y/o contraseña incorrecto.".$user_id);
+    redirect('login.php', false);
+  }
+}else{
+   $session->msg("d", $errors);
+   redirect('login.php', false);
+}

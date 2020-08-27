@@ -1,7 +1,4 @@
-<?php
-    session_start();
-    
-?>
+<?php $user = current_user(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -45,7 +42,7 @@
 
 <body class="animsition">
     <div class="page-wrapper">
-        <?php include("sidebar.php") ?>
+        <?php include_once("sidebar.php") ?>
         <!-- MAIN CONTENT-->
         <div class="main-content">
             <div class="section__content section__content--p30">
