@@ -2,6 +2,20 @@
 require_once('controller/load.php');
 $users = find_all_users();
 
+@$id = $_GET['id'];
+$user = find_by_id("login_usuario", $id);
+
+if(isset($id)){
+    $estado = 1;
+    if($user['estado'] === "1"){
+        $estado = 0;
+    }
+    $sql = "UPDATE login_usuario SET estado='{$estado}' WHERE id='{$id}'";
+    $result = $pdo->prepare($sql);
+    $result->execute();
+    redirect("usuarios.php", false);
+}
+
 include("layouts/header.php");
 ?>
 <div class="row">
@@ -54,17 +68,15 @@ include("layouts/header.php");
                                 </td>
                                 <td>
                                     <div class="table-data-feature">
-
                                         <?php if ($user['estado'] === '1') : ?>
-                                            <button class="item bg-light border border-success" data-toggle="tooltip" data-placement="top" title="Active">
-                                            <i class="zmdi zmdi-mood  text-success"></i></button>
+                                            <a href="usuarios.php?id=<?php echo $user['id']; ?>" class="item bg-light border border-success" data-toggle="tooltip" data-placement="top" title="Active">
+                                            <i class="zmdi zmdi-mood  text-success"></i></a>
 
                                         <?php elseif ($user['estado'] === '0') : ?>
-                                            <button class="item bg-light border border-danger" data-toggle="tooltip" data-placement="top" title="Inactive">
-                                            <i class="zmdi zmdi-mood-bad text-danger"></i> </button>
+                                            <a href="#" class="item bg-light border border-danger" data-toggle="tooltip" data-placement="top" title="Inactive">
+                                            <i class="zmdi zmdi-mood-bad text-danger"></i> </a>
 
                                         <?php endif; ?>
-
                                         <button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
                                             <i class="zmdi zmdi-edit"></i>
                                         </button>
