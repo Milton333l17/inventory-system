@@ -45,25 +45,26 @@ include("layouts/header.php");
                                 <td><?php echo $user['documento']; ?></td>
                                 <td><?php echo $user['email'];    ?></td>
                                 <td>
-                                    <?php
-                                    if ($user['rol_id'] === '1') {
-                                        echo '<span class="role admin">Administrador</span>';
-                                    } else if ($user['rol_id'] === '2') {
-                                        echo '<span class="role user">Empleado</span>';
-                                    }
-                                    ?>
+
+                                    <?php  if ($user['rol_id'] === '1'): ?>
+                                        <span class="role admin">Administrador</span>
+                                    <?php  elseif ($user['rol_id'] === '2'): ?>
+                                        <span class="role user">Empleado</span>
+                                        <?php endif; ?>
                                 </td>
                                 <td>
                                     <div class="table-data-feature">
-                                        <?php
-                                        if ($user['estado'] === '1') {
-                                            echo '<button class="item" data-toggle="tooltip" data-placement="top" title="Active">
-                                            <i class="zmdi zmdi-mood"></i></button>';
-                                        } else if ($user['estado'] === '0') {
-                                            echo '<button class="item" data-toggle="tooltip" data-placement="top" title="Inactive">
-                                            <i class="zmdi zmdi-mood-bad"></i>
-                                            </button>';
-                                        } ?>
+
+                                        <?php if ($user['estado'] === '1') : ?>
+                                            <button class="item bg-light border border-success" data-toggle="tooltip" data-placement="top" title="Active">
+                                            <i class="zmdi zmdi-mood  text-success"></i></button>
+
+                                        <?php elseif ($user['estado'] === '0') : ?>
+                                            <button class="item bg-light border border-danger" data-toggle="tooltip" data-placement="top" title="Inactive">
+                                            <i class="zmdi zmdi-mood-bad text-danger"></i> </button>
+
+                                        <?php endif; ?>
+
                                         <button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
                                             <i class="zmdi zmdi-edit"></i>
                                         </button>

@@ -63,7 +63,7 @@ function find_all($table){
 /*-------------------------------------------------------------*/
 function find_all_users(){
     global $pdo;
-    $sql = $pdo->prepare('Select * from login_usuario WHERE id!=1');
+    $sql = $pdo->prepare('Select * from login_usuario WHERE id!=0');
     $sql->execute();
     $result = $sql->fetchAll();
     return $result;
