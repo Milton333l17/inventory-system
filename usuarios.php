@@ -1,13 +1,16 @@
 <?php
 require_once('controller/load.php');
 $users = find_all_users();
+$tipo_doc = find_all('tip_doc');
+$roles = find_all('rol');
+
 
 @$id = $_GET['id'];
 $user = find_by_id("login_usuario", $id);
 
-if(isset($id)){
+if (isset($id)) {
     $estado = 1;
-    if($user['estado'] === "1"){
+    if ($user['estado'] === "1") {
         $estado = 0;
     }
     $sql = "UPDATE login_usuario SET estado='{$estado}' WHERE id='{$id}'";
@@ -18,6 +21,7 @@ if(isset($id)){
 
 include("layouts/header.php");
 ?>
+
 <div class="row">
     <div class="col-lg-12">
         <!-- Usuarios Registro-->
@@ -60,24 +64,24 @@ include("layouts/header.php");
                                 <td><?php echo $user['email'];    ?></td>
                                 <td>
 
-                                    <?php  if ($user['rol_id'] === '1'): ?>
+                                    <?php if ($user['rol_id'] === '1') : ?>
                                         <span class="role admin">Administrador</span>
-                                    <?php  elseif ($user['rol_id'] === '2'): ?>
+                                    <?php elseif ($user['rol_id'] === '2') : ?>
                                         <span class="role user">Empleado</span>
-                                        <?php endif; ?>
+                                    <?php endif; ?>
                                 </td>
                                 <td>
                                     <div class="table-data-feature">
-                                        <?php if ($user['estado'] === '1') : ?>
-                                            <a href="usuarios.php?id=<?php echo $user['id']; ?>" class="item bg-light border border-success" data-toggle="tooltip" data-placement="top" title="Active">
-                                            <i class="zmdi zmdi-mood  text-success"></i></a>
 
-                                        <?php elseif ($user['estado'] === '0') : ?>
-                                            <a href="#" class="item bg-light border border-danger" data-toggle="tooltip" data-placement="top" title="Inactive">
-                                            <i class="zmdi zmdi-mood-bad text-danger"></i> </a>
-
+                                        <a href="usuarios.php?id=<?php echo $user['id']; ?>" class="item bg-light" data-toggle="tooltip" data-placement="top" <?php if ($user['estado'] === '1') : ?> title="Active">
+                                            <i class="zmdi zmdi-mood text-success"></i>
+                                        <?php else : ?>
+                                            title="Inactivar">
+                                            <i class="zmdi zmdi-mood-bad text-danger"></i>
                                         <?php endif; ?>
-                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
+                                        </a>
+
+                                        <button type="button" class="item" data-toggle="modal" data-target="#update" data-placement="top" title="Edit">
                                             <i class="zmdi zmdi-edit"></i>
                                         </button>
                                         <button class="item" data-toggle="tooltip" data-placement="top" title="Delete">
@@ -95,6 +99,44 @@ include("layouts/header.php");
 <!-- END USER DATA-->
 </div>
 </div>
+<!-- Modal -->
+<div class="modal fade" id="update" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form action="edit_user.php?id=<?php echo $user['id']; ?>" method="POST">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Actualizar usuario <?php echo $user['nombres'] ?></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                        <div class="row form-group">
+                            <div class="col-4">
+                                <label for="tipo_rol">Tipo rol:</label>
+                            </div>
+                            <div class="col-8">
+                                <select name="tip_rol" class="form-control" required>
+                                    <option value="">Seleccione una opción...</option>
+                                    <?php foreach ($roles as $rol) : ?>
+                                        <option value="<?php echo $rol['idRol']; ?>" <?php if ($rol['idRol'] == $user['rol_id']) : echo 'selected'; endif; ?>>
+                                            <?php echo $rol['rol']; ?>
+                                        </option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" name="actualizar" class="btn btn-primary">Actualizar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- Fin modal -->
 <?php
 include("layouts/footer.php");
 ?>
