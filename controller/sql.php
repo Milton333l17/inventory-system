@@ -63,7 +63,7 @@ function find_all($table){
 /*-------------------------------------------------------------*/
 function find_all_users(){
     global $pdo;
-    $sql = $pdo->prepare('Select * from login_usuario WHERE id!=1');
+    $sql = $pdo->prepare('Select * from login_usuario');
     $sql->execute();
     $result = $sql->fetchAll();
     return $result;
@@ -94,3 +94,32 @@ function verify_email($email){
     }
     return false;
 }
+/*--------------------------------------------------------------*/
+/* Función para verificar categoría existente
+/*--------------------------------------------------------------*/
+function verify_category($category){
+    global $pdo;
+    $sql = "SELECT nombre FROM categorias WHERE nombre=$category";
+    $result = $pdo->prepare($sql);
+    $result->execute();
+    if($result->rowCount() > 0){
+        return true;
+    }
+    return false;
+}
+/*--------------------------------------------------------------*/
+/* Función para cambiar estado
+/*--------------------------------------------------------------*/
+function change_state($table, $id, $state){
+    global $pdo;
+    $estado = 1;
+    if ($state === "1") {
+        $estado = 0;
+    }
+
+    $sql = "UPDATE ".$table." SET estado='{$estado}' WHERE id='{$id}'";
+    $result = $pdo->prepare($sql);
+    $result->execute();
+}
+
+    
