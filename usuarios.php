@@ -81,7 +81,7 @@ include("layouts/header.php");
                                         <?php endif; ?>
                                         </a>
 
-                                        <a href="" type="button" class="item" data-toggle="modal" data-target="#update" data-placement="top" title="Edit">
+                                        <button type="button" class="item" data-toggle="modal" data-target="#Edit<?php echo $user['id']; ?>" data-placement="top" title="Edit">
                                             <i class="zmdi zmdi-edit"></i>
                                         </a> 
                                         <button class="item" data-toggle="tooltip" data-placement="top" title="Delete">
@@ -100,17 +100,18 @@ include("layouts/header.php");
 </div>
 </div>
 <!-- Modal -->
-<div class="modal fade" id="update" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <form action="edit_user.php?id=<?php echo $user['id']; ?>" method="POST">
+<?php foreach ($users as $user) : ?>
+    <div class="modal" tabindex="-1" id="Edit<?= $user['id']; ?>">
+        <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Actualizar usuario <?php echo $user['nombres'] ?></h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
+                <form action="edit_user.php?id=<?= $user['id']; ?>" method="POST">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Editar categoria</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
                         <div class="row form-group">
                             <div class="col-4">
                                 <label for="tipo_rol">Tipo rol:</label>
@@ -119,23 +120,24 @@ include("layouts/header.php");
                                 <select name="tip_rol" class="form-control" required>
                                     <option value="">Seleccione una opción...</option>
                                     <?php foreach ($roles as $rol) : ?>
-                                        <option value="<?php echo $rol['idRol']; ?>" <?php if ($rol['idRol'] == $user['rol_id']) : echo 'selected'; endif; ?>>
+                                        <option value="<?php echo $rol['idRol']; ?>" <?php if ($rol['idRol'] == $user['rol_id']) : echo 'selected';
+                                                                                        endif; ?>>
                                             <?php echo $rol['rol']; ?>
                                         </option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    <button type="submit" name="actualizar" class="btn btn-primary">Actualizar</button>
-                </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary" name="actualizar">Actualizar</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </form>
             </div>
-        </form>
+        </div>
     </div>
-</div>
+<?php endforeach; ?>
 <!-- Fin modal -->
 <?php
 include("layouts/footer.php");
