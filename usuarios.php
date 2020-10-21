@@ -83,7 +83,7 @@ include("layouts/header.php");
 
                                         <button type="button" class="item" data-toggle="modal" data-target="#Edit<?php echo $user['id']; ?>" data-placement="top" title="Edit">
                                             <i class="zmdi zmdi-edit"></i>
-                                        </button>
+                                        </a> 
                                         <button class="item" data-toggle="tooltip" data-placement="top" title="Delete">
                                             <i class="zmdi zmdi-delete"></i>
                                         </button>
