@@ -44,8 +44,20 @@
                         <i class="fas fa-table"></i>Tablas</a>
                 </li>
                 <li>
-                    <a href="form.html">
-                        <i class="far fa-check-square"></i>Formulario</a>
+                    <a href="form.php">
+                        <i class="far fa-check-square"></i>Registro</a>
+                </li>
+                <li>
+                    <a href="usuarios.php">
+                        <i class="fas fa-user"></i>Usuarios</a>
+                </li>
+                <li>
+                    <a href="categorias.php">
+                        <i class="fas fa-anchor"></i>Categorias</a>
+                </li>
+                <li>
+                    <a href="proveedores.php">
+                        <i class="fas fa-users"></i>Proveedor</a>
                 </li>
                 <li>
                     <a href="calendar.html">
@@ -151,9 +163,21 @@
                     <a href="table.html">
                         <i class="fas fa-table"></i>Tablas</a>
                 </li>
-                <li class="active">
+                <li >
                     <a href="form.php">
-                        <i class="far fa-check-square"></i>Formulario</a>
+                        <i class="fas fa-check-square"></i>Registro</a>
+                </li>
+                <li>
+                    <a href="usuarios.php">
+                        <i class="fas fa-user"></i>Usuarios</a>
+                </li>
+                <li>
+                    <a href="categorias.php">
+                        <i class="fas fa-anchor"></i>Categorias</a>
+                </li>
+                <li>
+                    <a href="proveedores.php">
+                        <i class="fas fa-users"></i>Proveedor</a>
                 </li>
                 <li>
                     <a href="calendar.html">

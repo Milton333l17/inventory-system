@@ -108,6 +108,19 @@ function verify_category($category){
     return false;
 }
 /*--------------------------------------------------------------*/
+/* Función para verificar proveedor existente
+/*--------------------------------------------------------------*/
+function verify_proveedor($nombre, $telefono, $direccion ){
+    global $pdo;
+    $sql = "SELECT * FROM provedor WHERE nombre=$nombre ,telefono=$telefono, direccion=$direccion  ";
+    $result = $pdo->prepare($sql);
+    $result->execute();
+    if($result->rowCount() > 0){
+        return true;
+    }
+    return false;
+}
+/*--------------------------------------------------------------*/
 /* Función para cambiar estado
 /*--------------------------------------------------------------*/
 function change_state($table, $id, $state){
