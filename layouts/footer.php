@@ -46,7 +46,7 @@
 <script>
     window.setTimeout(function() {
         $(".alert").alert('close');
-    }, 5000);
+    }, 10000);
 </script>
 
 </body>

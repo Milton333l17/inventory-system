@@ -1,4 +1,5 @@
-<?php $user = current_user(); ?>
+<?php $user = current_user();
+@$modal = '' ?>
 <!DOCTYPE html>
 <html lang="en">
 

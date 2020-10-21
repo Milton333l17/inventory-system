@@ -121,5 +121,17 @@ function change_state($table, $id, $state){
     $result = $pdo->prepare($sql);
     $result->execute();
 }
-
+/*--------------------------------------------------------------*/
+/* Función para verificar producto existente
+/*--------------------------------------------------------------*/
+function verify_productos($productos){
+    global $pdo;
+    $sql = "SELECT nombre FROM productos WHERE nombre=$productos";
+    $result = $pdo->prepare($sql);
+    $result->execute();
+    if($result->rowCount() > 0){
+        return true;
+    }
+    return false;
+}
     

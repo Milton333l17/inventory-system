@@ -121,6 +121,7 @@ include_once("layouts/header.php");
                     <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block" name="registrar">
                         <i class="fa fa-lock fa-lg"></i>&nbsp;Registrar
                     </button>
+                    
                 </form>
 
             </div>
