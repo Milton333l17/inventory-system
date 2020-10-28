@@ -126,9 +126,16 @@ include_once("layouts/header.php");
                             <select name="proveedor" id="select" class="form-control" >
                                 <option value="">Seleccione el proveedor</option>
                                 <?php foreach ($proveedores as $provedores) : ?>
-                                    <option value="<?php echo $provedores['id'] ?>">
-                                        <?php echo $provedores['nombre']; ?>
-                                    </option>
+                                   
+                                <?php if($provedores['estado'] === "1"): ?>
+                                         <option value="<?php echo $provedores['id'] ?>">
+
+
+                                         <?php echo $provedores['nombre']; ?>
+                                         </option>
+                                    <?php endif ?>
+                                       
+                                    
                                 <?php endforeach; ?>
                             </select>
                         </div>

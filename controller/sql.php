@@ -147,4 +147,3 @@ function verify_productos($productos){
     }
     return false;
 }
-    
