@@ -147,4 +147,13 @@ function verify_productos($productos){
     }
     return false;
 }
-    
+/*--------------------------------------------------------------*/
+/* Funcion para seleccionar todos los productos
+/*--------------------------------------------------------------*/
+function find_all_producto(){
+    global $pdo;
+    $sql = $pdo->prepare('SELECT p.id, p.nombre AS pnombre, c.nombre, p.descripcion, m.medida, e.tipo_estado, pro.nombre AS pronombre From productos p LEFT JOIN categorias c ON p.categoria_id= c.id LEFT JOIN unidad_medida m ON p.unidad_medida_id= m.idunidad_medida LEFT JOIN estado e ON p.estado_id= e.idestado LEFT JOIN provedor pro ON p.provedor_id=pro.id');
+    $sql->execute();
+    $result = $sql->fetchAll();
+    return $result;
+}
