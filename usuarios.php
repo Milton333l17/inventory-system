@@ -106,7 +106,7 @@ include("layouts/header.php");
             <div class="modal-content">
                 <form action="edit_user.php?id=<?= $user['id']; ?>" method="POST">
                     <div class="modal-header">
-                        <h5 class="modal-title">Editar categoria</h5>
+                        <h5 class="modal-title">Editar rol usuario</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
