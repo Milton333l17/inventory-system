@@ -1,7 +1,7 @@
 <?php
 require_once('controller/load.php');
 $modal = "add_entradas.php";
-$provedor = find_all('provedor');
+$entradas =table_entry();
 
 @$id = $_GET['id'];
 $proveedor = find_by_id("provedor", $id);
@@ -36,13 +36,13 @@ include_once("layouts/header.php");
         </thead>
         <tbody>
             <?php $i = 1;
-            foreach ($provedor as $socios) : ?>
+            foreach ($entradas as $entrada) : ?>
                 <tr class="tr-shadow">
                     <td><?php echo $i;
                         $i++; ?></td>
-                    <td><?php echo $socios['nombre'] ?></td>
-                    <td><?php echo $socios['telefono'] ?></td>
-                    <td><?php echo $socios['direccion'] ?></td>
+                    <td><?php echo $entrada['id'] ?></td>
+                    <td><?="hola" ?></td>
+                    
                     <td>
                         <div class="fa-2x">
                             <a href="proveedores.php?id=<?= $socios['id']; ?>" class="item mr-1" data-toggle="tooltip" data-placement="top" <?php if ($socios['estado'] === '1') : ?> title="Activo">

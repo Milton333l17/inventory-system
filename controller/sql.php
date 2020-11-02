@@ -147,3 +147,15 @@ function verify_productos($productos){
     }
     return false;
 }
+/*-------------------------------------------------------------*/
+/* Función para selecionar los datos ligados a las enttrada 
+/*-------------------------------------------------------------*/
+function table_entry(){
+    global $pdo;
+    $sql = "SELECT * FROM entradas LEFT JOIN productos ON e.productos_id = p.id ";
+    $result = $pdo->prepare($sql);
+    $result->execute();
+    $row = $result->fetchAll();
+    return $row;
+    
+}
