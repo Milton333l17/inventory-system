@@ -101,7 +101,7 @@ if (isset($_POST['add_entradas'])) {
                             <label for="select" class=" form-control-label">Fecha</label>
                         </div>
                         <div class="col-12 col-md-8">
-                            <input type="date" name="fecha" value="<?=date('Y-m-d')?>" min="2020-10-28" class="form-control" require>
+                            <input type="date" name="fecha" value="<?=date('Y-m-d')?>" min="<?=date('Y-m-d')?>" class="form-control" require>
                         </div>
                         
                     </div>

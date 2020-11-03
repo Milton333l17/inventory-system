@@ -1,16 +1,18 @@
 <?php
+
+
 require_once('controller/load.php');
+
 $modal = "add_entradas.php";
-$entradas =table_entry();
+$entrada =find_all_entradas();
+include_once("layouts/header.php");
+
 
 @$id = $_GET['id'];
 $proveedor = find_by_id("provedor", $id);
-if (isset($id)) {
-    change_state("provedor", $id, $proveedor['estado']);
-    redirect("proveedores.php", false);
-}
 
-include_once("layouts/header.php");
+
+
 ?>
 
 <h3 class="title-5 m-b-35">Entradas</h3>
@@ -36,66 +38,23 @@ include_once("layouts/header.php");
         </thead>
         <tbody>
             <?php $i = 1;
-            foreach ($entradas as $entrada) : ?>
+            foreach ($entrada as $entradas) : ?>
                 <tr class="tr-shadow">
                     <td><?php echo $i;
                         $i++; ?></td>
-                    <td><?php echo $entrada['id'] ?></td>
-                    <td><?="hola" ?></td>
-                    
-                    <td>
-                        <div class="fa-2x">
-                            <a href="proveedores.php?id=<?= $socios['id']; ?>" class="item mr-1" data-toggle="tooltip" data-placement="top" <?php if ($socios['estado'] === '1') : ?> title="Activo">
-                                <i class="zmdi zmdi-mood text-success"></i>
-                            <?php else : ?>
-                                title="Inactivo">
-                                <i class="zmdi zmdi-mood-bad text-danger"></i>
-                            <?php endif; ?>
-                            </a>
-                            <button type="button" class="item" data-placement="top" data-toggle="modal" data-target="#Edit<?= $socios['id']; ?>">
-                                <i class="zmdi zmdi-edit text-warning"></i>
-                            </button>
-                        </div>
-                    </td>
+                    <td><?= $entradas['nombre'] ?></td>
+                    <td><?= $entradas['nombres'].$entradas['apellidos'] ?></td>
+                    <td><?= $entradas['tipo_estado'] ?></td>
+                    <td><?= $entradas['fecha'] ?></td>
+                    <td><?= $entradas['cantidad'] ?></td>
+                  
+                   
                 </tr>
             <?php endforeach; ?>
         </tbody>
     </table>
+
 </div>
 <?php
 include_once("layouts/footer.php");
 ?>
-<?php foreach ($provedor as $socios) : ?>
-    <div class="modal" tabindex="-1" id="Edit<?= $socios['id']; ?>">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <form action="add_proveedor.php?id=<?= $socios['id']; ?>" method="POST">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Editar proveedor</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="cc-payment" class="control-label mb-1">Nombre</label>
-                            <input id="cc-pament" name="nombre_modal" type="text" class="form-control" aria-invalid="false" value="<?php echo $socios['nombre'] ?>" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="cc-payment" class="control-label mb-1">telefono</label>
-                            <input id="cc-pament" name="telefono_modal" type="text" class="form-control" aria-invalid="false" value="<?php echo $socios['telefono'] ?>" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="cc-payment" class="control-label mb-1">Direccion</label>
-                            <input id="cc-pament" name="direccion_modal" type="text" class="form-control" aria-invalid="false" value="<?php echo $socios['direccion'] ?>" required>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary" name="update_provedor">Actualizar</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-<?php endforeach; ?>

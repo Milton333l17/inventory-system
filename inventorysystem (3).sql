@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-10-2020 a las 21:09:52
--- Versión del servidor: 10.4.14-MariaDB
--- Versión de PHP: 7.4.10
+-- Tiempo de generación: 03-11-2020 a las 19:50:17
+-- Versión del servidor: 10.4.11-MariaDB
+-- Versión de PHP: 7.4.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -33,6 +33,15 @@ CREATE TABLE `categorias` (
   `estado` tinyint(4) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Volcado de datos para la tabla `categorias`
+--
+
+INSERT INTO `categorias` (`id`, `nombre`, `estado`) VALUES
+(1, 'cloroxer', 1),
+(4, 'andres', 1),
+(5, '          ', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -40,18 +49,34 @@ CREATE TABLE `categorias` (
 --
 
 CREATE TABLE `entradas` (
-  `identradas` int(11) NOT NULL COMMENT 'se guardara la ide de las entradas',
-  `Nombre_produ` varchar(45) COLLATE utf8_spanish_ci NOT NULL COMMENT 'en este campo se guardara el nombre del producto',
+  `identradas` int(11) NOT NULL COMMENT 'se guardara el id de las entradas',
+  `producto_id` int(11) NOT NULL COMMENT 'en este campo se guardara el nombre del producto',
   `cantidad` int(11) NOT NULL COMMENT 'en este campo se guardara la cantidad que llega del producto',
-  `Stock` int(11) NOT NULL COMMENT 'aqui se guardara los productos que se guardaron y que hay en el almacen',
-  `hora y fecha` datetime NOT NULL COMMENT 'en este campo se guardara la hora y la fecha de llegada del producto',
-  `Login_usuario_n° documento` int(11) NOT NULL COMMENT 'en este campo se guardara el numero de documento que se registro ',
-  `unidad_medida_id` int(11) NOT NULL COMMENT 'en este campo se guarda la unidad de la cantidad que llego ya sea litos,unidad, etc.',
-  `tipo_producto_id` int(11) NOT NULL COMMENT 'en este campo se guarda el tipo de producto ya sea aseo, hjiene,persona,etc.',
-  `estado_idestado` int(11) NOT NULL COMMENT 'en este campo se guardara el estado que llego el producto ya sea bueno o malo',
-  `Provedor_id` int(11) NOT NULL COMMENT 'en este campo se guarda el telefono del provedor',
-  `salida_idsalida` int(11) NOT NULL COMMENT 'ene este campo se guarda la cantidad de productos que salieron'
+  `fecha` date NOT NULL COMMENT 'en este campo se guardara la hora y la fecha de llegada del producto',
+  `login_usuario_id` int(11) NOT NULL COMMENT 'en este campo se guardara el numero de documento que se registro ',
+  `estado_id` int(11) NOT NULL COMMENT 'en este campo se guardara el estado que llego el producto ya sea bueno o malo'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `entradas`
+--
+
+INSERT INTO `entradas` (`identradas`, `producto_id`, `cantidad`, `fecha`, `login_usuario_id`, `estado_id`) VALUES
+(1, 9, 56, '2020-10-30', 0, 2),
+(2, 9, 56, '2020-10-28', 0, 2),
+(3, 10, 45, '2020-10-27', 21, 2),
+(4, 10, 23, '2020-10-28', 20, 2),
+(5, 9, -6, '2020-10-14', 21, 2),
+(6, 9, 9, '2020-10-27', 21, 2),
+(7, 9, 90, '2020-10-22', 21, 2),
+(8, 11, 11, '2020-11-26', 21, 2),
+(9, 13, 6, '2020-11-18', 21, 1),
+(10, 11, 78, '2020-11-12', 21, 1),
+(11, 11, 23, '2020-11-11', 21, 1),
+(12, 13, 23, '2020-11-04', 21, 2),
+(13, 11, 9, '2020-11-26', 21, 1),
+(14, 11, 34, '2020-11-04', 21, 1),
+(15, 14, 23, '2020-11-19', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -97,7 +122,8 @@ CREATE TABLE `login_usuario` (
 
 INSERT INTO `login_usuario` (`id`, `documento`, `nombres`, `apellidos`, `password`, `email`, `estado`, `tip_doc_id`, `rol_id`) VALUES
 (1, 1001995096, 'Stephen', 'Alarcon', '$2y$10$cXajR4X9FoEu/ZSp0QuJW.hPbBoyZmWS65QXbI7At/UklWk4pbDcS', 'stephen@gmail.com', 0, 1, 1),
-(20, 1006656642, 'milton', 'araque', '$2y$10$bLf35K3URKfc7xdl28AryenhuvleONdnSPUlsAJz0D6ePQU9WUKb.', 'milton333l@hotmail.com', 1, 2, 1);
+(20, 1006656642, 'milton', 'araque', '$2y$10$bLf35K3URKfc7xdl28AryenhuvleONdnSPUlsAJz0D6ePQU9WUKb.', 'milton333l@hotmail.com', 1, 2, 1),
+(21, 1000776005, 'Andres ', 'Cristancho', '$2y$10$Wy0dLWOm8C3/vXu9bQDOQ.IOaKQu4KWVamv6EIjXvPI/8RUXRNe0u', 'afcristancho5@misena.edu.co', 0, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -111,9 +137,19 @@ CREATE TABLE `productos` (
   `descripcion` varchar(95) COLLATE utf8_unicode_ci NOT NULL,
   `unidad_medida_id` int(11) NOT NULL,
   `categoria_id` int(11) NOT NULL,
-  `estado` tinyint(4) NOT NULL,
-  `provedor_id` int(11) NOT NULL
+  `estado_id` int(11) NOT NULL,
+  `provedor_id` int(11) NOT NULL,
+  `cantidad` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `productos`
+--
+
+INSERT INTO `productos` (`id`, `nombre`, `descripcion`, `unidad_medida_id`, `categoria_id`, `estado_id`, `provedor_id`, `cantidad`) VALUES
+(11, 'huesos', 'para perros ', 2, 4, 3, 21, 0),
+(13, 'huesos gatos', 'para trepadores', 1, 4, 2, 20, 0),
+(14, 'latigos', 'para castigar perros y perras', 1, 4, 3, 20, 0);
 
 -- --------------------------------------------------------
 
@@ -122,11 +158,21 @@ CREATE TABLE `productos` (
 --
 
 CREATE TABLE `provedor` (
-  `idprovedor` int(20) NOT NULL COMMENT 'se guarda la id del provedor',
+  `id` int(20) NOT NULL COMMENT 'se guarda la id del provedor',
   `telefono` int(11) NOT NULL COMMENT 'se guarda el telefono del provedor',
-  `nombre` int(11) NOT NULL COMMENT 'se guarda el nombre de la persona o el laboratorio(provedor)',
-  `direccion` varchar(45) COLLATE utf8_spanish_ci DEFAULT NULL COMMENT 'se guarda la dirreccion del provedor'
+  `nombre` varchar(45) COLLATE utf8_spanish_ci NOT NULL COMMENT 'se guarda el nombre de la persona o el laboratorio(provedor)',
+  `direccion` varchar(45) COLLATE utf8_spanish_ci DEFAULT NULL COMMENT 'se guarda la dirreccion del provedor',
+  `estado` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `provedor`
+--
+
+INSERT INTO `provedor` (`id`, `telefono`, `nombre`, `direccion`, `estado`) VALUES
+(20, 123456789, 'hawking', 'crack12', 1),
+(21, 8364321, 'felipondio', 'crav89', 0),
+(22, 2147483647, 'logic', 'sdsdadsa', 1);
 
 -- --------------------------------------------------------
 
@@ -163,17 +209,6 @@ CREATE TABLE `salida` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tipo_producto`
---
-
-CREATE TABLE `tipo_producto` (
-  `idtipo_producto` int(11) NOT NULL COMMENT 'en este campo se guarda la id del tipo de producto',
-  `descripcion` tinytext COLLATE utf8_spanish_ci NOT NULL COMMENT 'en este campo se guarda la descripcion del producto, sea hijiene,aseo,personal, etc.'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `tip_doc`
 --
 
@@ -203,6 +238,14 @@ CREATE TABLE `unidad_medida` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
+-- Volcado de datos para la tabla `unidad_medida`
+--
+
+INSERT INTO `unidad_medida` (`idunidad_medida`, `medida`) VALUES
+(1, 'unidad'),
+(2, 'ml');
+
+--
 -- Índices para tablas volcadas
 --
 
@@ -218,10 +261,8 @@ ALTER TABLE `categorias`
 --
 ALTER TABLE `entradas`
   ADD PRIMARY KEY (`identradas`),
-  ADD KEY `estado_idestado` (`estado_idestado`),
-  ADD KEY `salida_idsalida` (`salida_idsalida`),
-  ADD KEY `unidad_medida_id` (`unidad_medida_id`,`Provedor_id`),
-  ADD KEY `tipo_producto_id` (`tipo_producto_id`);
+  ADD KEY `estado_idestado` (`estado_id`),
+  ADD KEY `producto_id` (`producto_id`);
 
 --
 -- Indices de la tabla `estado`
@@ -247,13 +288,14 @@ ALTER TABLE `productos`
   ADD UNIQUE KEY `nombre` (`nombre`),
   ADD KEY `unidad_medida_id` (`unidad_medida_id`),
   ADD KEY `categoria_id` (`categoria_id`),
-  ADD KEY `provedor_id` (`provedor_id`);
+  ADD KEY `provedor_id` (`provedor_id`),
+  ADD KEY `estado_id` (`estado_id`);
 
 --
 -- Indices de la tabla `provedor`
 --
 ALTER TABLE `provedor`
-  ADD PRIMARY KEY (`idprovedor`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `rol`
@@ -283,7 +325,13 @@ ALTER TABLE `unidad_medida`
 -- AUTO_INCREMENT de la tabla `categorias`
 --
 ALTER TABLE `categorias`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT de la tabla `entradas`
+--
+ALTER TABLE `entradas`
+  MODIFY `identradas` int(11) NOT NULL AUTO_INCREMENT COMMENT 'se guardara el id de las entradas', AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `estado`
@@ -295,25 +343,25 @@ ALTER TABLE `estado`
 -- AUTO_INCREMENT de la tabla `login_usuario`
 --
 ALTER TABLE `login_usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `provedor`
 --
 ALTER TABLE `provedor`
-  MODIFY `idprovedor` int(20) NOT NULL AUTO_INCREMENT COMMENT 'se guarda la id del provedor';
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT COMMENT 'se guarda la id del provedor', AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de la tabla `unidad_medida`
 --
 ALTER TABLE `unidad_medida`
-  MODIFY `idunidad_medida` int(11) NOT NULL AUTO_INCREMENT COMMENT 'se guarda la id del la unidad que se va utilizar';
+  MODIFY `idunidad_medida` int(11) NOT NULL AUTO_INCREMENT COMMENT 'se guarda la id del la unidad que se va utilizar', AUTO_INCREMENT=3;
 
 --
 -- Restricciones para tablas volcadas
@@ -331,8 +379,9 @@ ALTER TABLE `login_usuario`
 --
 ALTER TABLE `productos`
   ADD CONSTRAINT `productos_ibfk_1` FOREIGN KEY (`categoria_id`) REFERENCES `categorias` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `productos_ibfk_2` FOREIGN KEY (`provedor_id`) REFERENCES `provedor` (`idprovedor`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `productos_ibfk_3` FOREIGN KEY (`unidad_medida_id`) REFERENCES `unidad_medida` (`idunidad_medida`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `productos_ibfk_2` FOREIGN KEY (`provedor_id`) REFERENCES `provedor` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `productos_ibfk_3` FOREIGN KEY (`unidad_medida_id`) REFERENCES `unidad_medida` (`idunidad_medida`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `productos_ibfk_4` FOREIGN KEY (`estado_id`) REFERENCES `estado` (`idestado`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

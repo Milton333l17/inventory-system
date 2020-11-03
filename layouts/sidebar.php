@@ -64,8 +64,8 @@
                         <i class="fas fa-calendar-alt"></i>Calendario</a>
                 </li>
                 <li>
-                    <a href="formproductos.php">
-                        <i class="fas fa-map-marker-alt"></i>Registro Nuevo Producto</a>
+                    <a href="productos.php">
+                        <i class="fas fa-map-marker-alt"></i>Producto</a>
                 </li>
                 <li class="has-sub">
                     <a class="js-arrow" href="#">
@@ -184,8 +184,8 @@
                         <i class="fas fa-calendar-alt"></i>Calendario</a>
                 </li>
                 <li>
-                    <a href="map.html">
-                        <i class="fas fa-map-marker-alt"></i>Mapas</a>
+                    <a href="productos.php">
+                        <i class="fas fa-map-marker-alt"></i>Producto</a>
                 </li>
                 <li class="has-sub">
                     <a class="js-arrow" href="#">
