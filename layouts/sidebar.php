@@ -65,7 +65,11 @@
                 </li>
                 <li>
                     <a href="productos.php">
-                        <i class="fas fa-map-marker-alt"></i>Producto</a>
+                    <i class="fas fa-baby-carriage"></i>Producto</a>
+                </li>
+                <li>
+                    <a href="entradas.php?start=0">
+                    <i class="fas fa-arrow-right"></i>Entradas</a>
                 </li>
                 <li class="has-sub">
                     <a class="js-arrow" href="#">
@@ -185,7 +189,11 @@
                 </li>
                 <li>
                     <a href="productos.php">
-                        <i class="fas fa-map-marker-alt"></i>Producto</a>
+                    <i class="fas fa-thumb-tack"></i>Producto</a>
+                </li>
+                <li>
+                    <a href="entradas.php?start=0">
+                    <i class="fas fa-arrow-right"></i>Entradas</a>
                 </li>
                 <li class="has-sub">
                     <a class="js-arrow" href="#">

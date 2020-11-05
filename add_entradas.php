@@ -20,7 +20,7 @@ if (isset($_POST['add_entradas'])) {
         //validacion cantidad
         if($cantidad<=0){
             $session->msg("i", "La cantidad debe ser positiva");
-            redirect('entradas.php', false);
+            redirect('entradas.php?start=0', false);
             
            
         }
@@ -30,21 +30,21 @@ if (isset($_POST['add_entradas'])) {
     
         if ($actual >= $fecha) {
             $session->msg("i", "La fecha no debe ser antigua");
-            redirect('entradas.php', false);
+            redirect('entradas.php?start=0', false);
         }
         
 
         $sql = "INSERT INTO entradas(producto_id, cantidad,fecha,login_usuario_id,estado_id) VALUES ('{$producto}','{$cantidad}','{$fecha}','{$user['id']}','{$estado}')";
         if ($pdo->query($sql)) {
             $session->msg("s", 'Entrada exitosa!');
-            redirect('entradas.php', false);
+            redirect('entradas.php?start=0', false);
         } else {
             $session->msg("d", 'Error al crear la Entrada.');
-            redirect('entradas.php', false);
+            redirect('entradas.php?start=0', false);
         }
     } else {
         $session->msg("d", $errors);
-        redirect('entradas.php', false);
+        redirect('entradas.php?start=0', false);
     }
 }
 

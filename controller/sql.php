@@ -161,10 +161,12 @@ function verify_productos($productos)
 /*-------------------------------------------------------------*/
 /* Función para selecionar los datos ligados a las enttrada 
 /*-------------------------------------------------------------*/
-function find_all_entradas()
-{
+function find_all_entradas($result_to_pages,$starts)
+{   
+    $numb1= (int)$starts;
+    $numb2= (int)$result_to_pages;    
     global $pdo;
-    $sql = $pdo->prepare('SELECT e.identradas, e.cantidad AS cantidad , e.fecha AS fecha, l.nombres, l.apellidos, es.tipo_estado, p.nombre  FROM entradas e LEFT JOIN login_usuario l ON e.login_usuario_id = l.id LEFT JOIN estado es ON e.estado_id= es.idestado LEFT JOIN productos p ON e.producto_id = p.id');
+    $sql = $pdo->prepare('SELECT e.identradas, e.cantidad AS cantidad , e.fecha AS fecha, l.nombres, l.apellidos, es.tipo_estado, p.nombre  FROM entradas e  LEFT JOIN login_usuario l ON e.login_usuario_id = l.id LEFT JOIN estado es ON e.estado_id= es.idestado LEFT JOIN productos p ON e.producto_id = p.id ORDER BY identradas DESC LIMIT '.$numb1 .",".$numb2 );
     $sql->execute();
     $result = $sql->fetchAll();
     return $result;
