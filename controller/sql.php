@@ -190,12 +190,29 @@ function find_all_producto()
 function sum_product($id, $cantidad)
 {
     global $pdo;
-    $id_producto =  $id;
+
+    $id_producto =  (int)$id;
     $tabla = find_by_id('productos', $id_producto);
     $cant_pro = $tabla['cantidad'];
-    $id = (int)$id;
+ 
     $total = $cantidad + $cant_pro;
     $sql = $pdo->prepare("UPDATE productos SET cantidad=? WHERE id=" . $id . " LIMIT 1");
     $result = $pdo->prepare($sql);
     $result->execute([$total]);
+}
+/*--------------------------------------------------------------*/
+/* Consultar calendario
+/*--------------------------------------------------------------*/
+function consul_calendary()
+{
+    global $pdo;
+
+    
+
+
+    $calendario = $pdo->prepare("SELECT * FROM calendario");
+    $calendario->execute();
+    $result = $calendario->fetchAll(PDO::FETCH_ASSOC);
+    $resultado = json_encode($result);
+    return $resultado;
 }

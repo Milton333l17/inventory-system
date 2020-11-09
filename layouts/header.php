@@ -38,8 +38,36 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
 
+     <!-- FullCalendar -->
+    <link href='vendor/fullcalendar-3.10.0/fullcalendar.min.css' rel='stylesheet' media="all" />
+    <link href='vendor/fullcalendar-3.10.0/bootstrap-clockpicker.css' rel='stylesheet' media="all" />
+    
+   
+
+
     <!-- Main CSS-->
     <link href="css/theme.css" rel="stylesheet" media="all">
+
+    <style>
+        .fc th{
+            padding: 10px 0px;
+            vertical-align: middle;
+            background: #9384;
+            color: white;
+        }
+        .au-card{
+            background:url('images/fondo_espacio.jpg');
+         background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+            
+        }
+        .fc-day-number{
+            color: white;
+        }
+        .fc-unthemed td.fc-today{background:#9384}
+
+    </style>
 
 </head>
 
