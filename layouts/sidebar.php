@@ -60,12 +60,16 @@
                         <i class="fas fa-users"></i>Proveedor</a>
                 </li>
                 <li>
-                    <a href="calendar.html">
+                    <a href="calendar.php">
                         <i class="fas fa-calendar-alt"></i>Calendario</a>
                 </li>
                 <li>
                     <a href="productos.php">
-                        <i class="fas fa-map-marker-alt"></i>Producto</a>
+                    <i class="fas fa-baby-carriage"></i>Producto</a>
+                </li>
+                <li>
+                    <a href="entradas.php?start=0">
+                    <i class="fas fa-arrow-right"></i>Entradas</a>
                 </li>
                 <li class="has-sub">
                     <a class="js-arrow" href="#">
@@ -137,40 +141,26 @@
     <div class="menu-sidebar__content js-scrollbar1">
         <nav class="navbar-sidebar">
             <ul class="list-unstyled navbar__list">
+
+                <li>
+                    <a href="index.html">
+                        <i class="fas fa-tachometer-alt"></i>Inicio </a>
+                </li>
                 <li class="has-sub">
                     <a class="js-arrow" href="#">
-                        <i class="fas fa-tachometer-alt"></i>Panel de control</a>
+                        <i class="fas fa-user"></i>Usuario</a>
                     <ul class="list-unstyled navbar__sub-list js-sub-list">
-                        <li>
-                            <a href="index.html">Panel de control 1 </a>
-                        </li>
-                        <li>
-                            <a href="index2.html">Panel de control 2</a>
-                        </li>
-                        <li>
-                            <a href="index3.html">Panel de control 3</a>
-                        </li>
-                        <li>
-                            <a href="index4.html">Panel de control 4</a>
-                        </li>
+                    <li >
+                    <a href="form.php">
+                        <i class="fas fa-check-square"></i>Registrar</a>
+                    </li>
+                    <li>
+                    <a href="usuarios.php">
+                        <i class="fas fa-user"></i>Tabla Usuarios</a>
+                    </li>   
                     </ul>
                 </li>
-                <li>
-                    <a href="chart.html">
-                        <i class="fas fa-chart-bar"></i>Graficos</a>
-                </li>
-                <li>
-                    <a href="table.html">
-                        <i class="fas fa-table"></i>Tablas</a>
-                </li>
-                <li >
-                    <a href="form.php">
-                        <i class="fas fa-check-square"></i>Registro</a>
-                </li>
-                <li>
-                    <a href="usuarios.php">
-                        <i class="fas fa-user"></i>Usuarios</a>
-                </li>
+              
                 <li>
                     <a href="categorias.php">
                         <i class="fas fa-anchor"></i>Categorias</a>
@@ -180,13 +170,25 @@
                         <i class="fas fa-users"></i>Proveedor</a>
                 </li>
                 <li>
-                    <a href="calendar.html">
+                    <a href="calendar.php">
                         <i class="fas fa-calendar-alt"></i>Calendario</a>
                 </li>
-                <li>
+                <li class="has-sub">
+                    <a class="js-arrow" href="#">
+                        <i class="fas fa-glass"></i>Productos</a>
+                    <ul class="list-unstyled navbar__sub-list js-sub-list">
+                    <li>
                     <a href="productos.php">
-                        <i class="fas fa-map-marker-alt"></i>Producto</a>
+                    <i class="fas fa-thumb-tack"></i>General Productos</a>
                 </li>
+                    
+                <li>
+                    <a href="entradas.php?start=0">
+                    <i class="fas fa-arrow-right"></i>Entradas</a>
+                </li>  
+                    </ul>
+                </li>
+            
                 <li class="has-sub">
                     <a class="js-arrow" href="#">
                         <i class="fas fa-copy"></i>Paginas</a>

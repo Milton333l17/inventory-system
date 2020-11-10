@@ -161,10 +161,12 @@ function verify_productos($productos)
 /*-------------------------------------------------------------*/
 /* Función para selecionar los datos ligados a las enttrada 
 /*-------------------------------------------------------------*/
-function find_all_entradas()
-{
+function find_all_entradas($result_to_pages,$starts)
+{   
+    $numb1= (int)$starts;
+    $numb2= (int)$result_to_pages;    
     global $pdo;
-    $sql = $pdo->prepare('SELECT e.identradas, e.cantidad AS cantidad , e.fecha AS fecha, l.nombres, l.apellidos, es.tipo_estado, p.nombre  FROM entradas e LEFT JOIN login_usuario l ON e.login_usuario_id = l.id LEFT JOIN estado es ON e.estado_id= es.idestado LEFT JOIN productos p ON e.producto_id = p.id');
+    $sql = $pdo->prepare('SELECT e.identradas, e.cantidad AS cantidad , e.fecha AS fecha, l.nombres, l.apellidos, es.tipo_estado, p.nombre  FROM entradas e  LEFT JOIN login_usuario l ON e.login_usuario_id = l.id LEFT JOIN estado es ON e.estado_id= es.idestado LEFT JOIN productos p ON e.producto_id = p.id ORDER BY identradas DESC LIMIT '.$numb1 .",".$numb2 );
     $sql->execute();
     $result = $sql->fetchAll();
     return $result;
@@ -188,10 +190,11 @@ function find_all_producto()
 function sum_product($id, $cantidad)
 {
     global $pdo;
-    $id_producto =  $id;
+
+    $id_producto =  (int)$id;
     $tabla = find_by_id('productos', $id_producto);
     $cant_pro = $tabla['cantidad'];
-    $id = (int)$id;
+ 
     $total = $cantidad + $cant_pro;
     $sql = $pdo->prepare("UPDATE productos SET cantidad=? WHERE id=" . $id . " LIMIT 1");
     $result = $pdo->prepare($sql);
@@ -207,4 +210,16 @@ function find_all_salidas()
     $sql->execute();
     $result = $sql->fetchAll();
     return $result;
+}
+/*--------------------------------------------------------------*/
+/* Consultar calendario
+/*--------------------------------------------------------------*/
+function consul_calendary()
+{
+    global $pdo;
+    $calendario = $pdo->prepare("SELECT * FROM calendario");
+    $calendario->execute();
+    $result = $calendario->fetchAll(PDO::FETCH_ASSOC);
+    $resultado = json_encode($result);
+    return $resultado;
 }

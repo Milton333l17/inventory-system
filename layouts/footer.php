@@ -11,7 +11,7 @@
 </div>
 
 </div>
-
+<?php $resultado = consul_calendary(); ?>
 </div>
 <div class="modal" tabindex="-1" id="Modal">
     <div class="modal-dialog">
@@ -19,7 +19,12 @@
     </div>
 </div>
 <!-- Jquery JS-->
-<script src="vendor/jquery-3.2.1.min.js"></script>
+<script src="vendor/fullcalendar-3.10.0/lib/jquery.min.js"></script>
+ <!-- full calendar requires moment along jquery which is included above -->
+ <script src="vendor/fullcalendar-3.10.0/lib/moment.min.js"></script>
+    <script src="vendor/fullcalendar-3.10.0/fullcalendar.min.js"></script>
+    <script src="vendor/fullcalendar-3.10.0/locale/es.js"></script>
+    <script src="vendor/fullcalendar-3.10.0/lib/bootstrap-clockpicker.js"></script>
 <!-- Bootstrap JS-->
 <script src="vendor/bootstrap-4.1/popper.min.js"></script>
 <script src="vendor/bootstrap-4.1/bootstrap.min.js"></script>
@@ -41,6 +46,9 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
 
+
+
+
 <!-- Main JS-->
 <script src="js/main.js"></script>
 <script>
@@ -48,6 +56,10 @@
         $(".alert").alert('close');
     }, 10000);
 </script>
+
+
+<!-- calendario -->
+
 
 </body>
 

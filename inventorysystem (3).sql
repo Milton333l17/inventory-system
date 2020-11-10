@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-11-2020 a las 19:50:17
+-- Tiempo de generación: 09-11-2020 a las 23:39:21
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.4.6
 
@@ -20,6 +20,31 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `inventorysystem`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `calendario`
+--
+
+CREATE TABLE `calendario` (
+  `id` int(11) NOT NULL,
+  `title` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
+  `descripcion` varchar(200) COLLATE utf8_spanish_ci NOT NULL,
+  `color` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
+  `textColor` text COLLATE utf8_spanish_ci NOT NULL,
+  `start` datetime NOT NULL,
+  `end` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `calendario`
+--
+
+INSERT INTO `calendario` (`id`, `title`, `descripcion`, `color`, `textColor`, `start`, `end`) VALUES
+(36, 'salsa', 'rosada', '#c18686', '#000000', '2020-11-22 18:19:00', '0000-00-00 00:00:00'),
+(37, 'perros', 'callejeros', '#ff0000', '#000000', '2020-11-24 19:38:00', '0000-00-00 00:00:00'),
+(38, 'cumpleaños', 'felipe', '#00b3ff', '#e33535', '2020-10-30 10:30:00', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -62,21 +87,29 @@ CREATE TABLE `entradas` (
 --
 
 INSERT INTO `entradas` (`identradas`, `producto_id`, `cantidad`, `fecha`, `login_usuario_id`, `estado_id`) VALUES
-(1, 9, 56, '2020-10-30', 0, 2),
-(2, 9, 56, '2020-10-28', 0, 2),
-(3, 10, 45, '2020-10-27', 21, 2),
-(4, 10, 23, '2020-10-28', 20, 2),
-(5, 9, -6, '2020-10-14', 21, 2),
-(6, 9, 9, '2020-10-27', 21, 2),
-(7, 9, 90, '2020-10-22', 21, 2),
-(8, 11, 11, '2020-11-26', 21, 2),
 (9, 13, 6, '2020-11-18', 21, 1),
 (10, 11, 78, '2020-11-12', 21, 1),
 (11, 11, 23, '2020-11-11', 21, 1),
 (12, 13, 23, '2020-11-04', 21, 2),
 (13, 11, 9, '2020-11-26', 21, 1),
 (14, 11, 34, '2020-11-04', 21, 1),
-(15, 14, 23, '2020-11-19', 1, 1);
+(15, 14, 23, '2020-11-19', 1, 1),
+(16, 13, 34, '2020-11-19', 21, 1),
+(17, 13, 23, '2020-11-05', 21, 1),
+(18, 11, 32, '2020-11-12', 21, 1),
+(19, 13, 43, '2020-11-18', 21, 2),
+(20, 14, 54, '2020-11-18', 21, 2),
+(21, 11, 34, '2020-11-18', 21, 2),
+(22, 14, 23, '2020-11-27', 21, 3),
+(23, 13, 23, '2020-11-20', 21, 2),
+(24, 13, 32, '2020-11-20', 21, 1),
+(25, 14, 54, '2020-11-18', 21, 2),
+(26, 11, 2, '2020-11-26', 21, 2),
+(27, 11, 3, '2020-11-20', 21, 2),
+(28, 15, 67, '2020-11-26', 0, 1),
+(29, 15, 5, '2020-11-19', 21, 1),
+(30, 13, 89, '2020-11-17', 21, 2),
+(31, 14, 23, '2020-11-07', 21, 2);
 
 -- --------------------------------------------------------
 
@@ -149,7 +182,8 @@ CREATE TABLE `productos` (
 INSERT INTO `productos` (`id`, `nombre`, `descripcion`, `unidad_medida_id`, `categoria_id`, `estado_id`, `provedor_id`, `cantidad`) VALUES
 (11, 'huesos', 'para perros ', 2, 4, 3, 21, 0),
 (13, 'huesos gatos', 'para trepadores', 1, 4, 2, 20, 0),
-(14, 'latigos', 'para castigar perros y perras', 1, 4, 3, 20, 0);
+(14, 'latigos', 'para castigar perros y perras', 1, 4, 3, 20, 0),
+(15, 'dispensador', 'dfdsfdsf', 1, 1, 2, 22, 0);
 
 -- --------------------------------------------------------
 
@@ -250,6 +284,12 @@ INSERT INTO `unidad_medida` (`idunidad_medida`, `medida`) VALUES
 --
 
 --
+-- Indices de la tabla `calendario`
+--
+ALTER TABLE `calendario`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `categorias`
 --
 ALTER TABLE `categorias`
@@ -322,6 +362,12 @@ ALTER TABLE `unidad_medida`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `calendario`
+--
+ALTER TABLE `calendario`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+
+--
 -- AUTO_INCREMENT de la tabla `categorias`
 --
 ALTER TABLE `categorias`
@@ -331,7 +377,7 @@ ALTER TABLE `categorias`
 -- AUTO_INCREMENT de la tabla `entradas`
 --
 ALTER TABLE `entradas`
-  MODIFY `identradas` int(11) NOT NULL AUTO_INCREMENT COMMENT 'se guardara el id de las entradas', AUTO_INCREMENT=16;
+  MODIFY `identradas` int(11) NOT NULL AUTO_INCREMENT COMMENT 'se guardara el id de las entradas', AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT de la tabla `estado`
@@ -349,7 +395,7 @@ ALTER TABLE `login_usuario`
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `provedor`
