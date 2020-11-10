@@ -216,3 +216,15 @@ function consul_calendary()
     $resultado = json_encode($result);
     return $resultado;
 }
+/*--------------------------------------------------------------*/
+/* Función para verificar usuario logeado
+/*--------------------------------------------------------------*/
+function is_logged_in(){
+    global $session;
+    $current_user = current_user();
+    //Si el usuario esta logeado
+    if(!$session->isUserLoggedIn(true)){
+ 
+        redirect('pagerror.php', false);
+    }
+}
