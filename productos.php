@@ -22,6 +22,7 @@ include_once("layouts/header.php");
                 <th>Nombre</th>
                 <th>Descripcion</th>
                 <th>unidad de medida</th>
+                <th>Cantidad</th>
                 <th>Categoria</th>
                 <th>Estado</th>
                 <th>Proveedor</th>
@@ -37,6 +38,7 @@ include_once("layouts/header.php");
                     <td><?php echo $productos['pnombre'] ?></td>
                     <td><?php echo $productos['descripcion'] ?></td>
                     <td><?php echo $productos['medida'] ?></td>
+                    <td><?php echo $productos['cantidad'] ?></td>
                     <td><?php echo $productos['nombre'] ?></td>
                     <td><?php echo $productos['tipo_estado'] ?></td>
                     <td><?php echo $productos['pronombre'] ?></td>

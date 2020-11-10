@@ -11,13 +11,14 @@ $proveedores = find_all('provedor');
 
 if (isset($_POST['actualizar'])) {
     $id_pro = (int)$_POST["id"];
-    $req_fields = array('nombrepro', 'descripcion','cantidad');
+    $req_fields = array('nombrepro', 'descripcion', 'cantidad');
     validate_fields($req_fields);
 
     if (empty($errors)) {
         $nombreproducto = $_POST["nombrepro"];
         $descripcionprodu = $_POST["descripcion"];
         $cantidad = (int)$_POST["cantidad"];
+        $cantidadnum = (int)$_POST["cantidadpro"];
         $categoria = (int)$_POST["categoria"];
         $estado = (int)$_POST['estado'];
         $proveedor = (int)$_POST["proveedor"];
@@ -40,7 +41,8 @@ if (isset($_POST['actualizar'])) {
             redirect('formproductos.php', false);
         }
 
-        $sql = "UPDATE productos SET nombre='{$nombreproducto}', descripcion = '{$descripcionprodu}', unidad_medida_id = {$cantidad},categoria_id ={$categoria}, estado_id = {$estado}, provedor_id = {$proveedor} WHERE id={$id} ";
+        $sql = "UPDATE productos SET nombre='{$nombreproducto}', descripcion = '{$descripcionprodu}', unidad_medida_id = '{$cantidad}', cantidadpro= '{$cantidadnum}',categoria_id ='{$categoria}', estado_id = '{$estado}', provedor_id = '{$proveedor}' WHERE id='{$id}'";
+        $result = $pdo->prepare($sql);
         if ($pdo->query($sql)) {
             $session->msg("s", 'Producto Actualizado Exitosamente!');
             redirect('productos.php', false);
@@ -50,7 +52,7 @@ if (isset($_POST['actualizar'])) {
         }
     } else {
         $session->msg("d", $errors);
-        redirect('edit_producto.php?id='.$id_pro, false);
+        redirect('edit_producto.php?id=' . $id_pro, false);
     }
 }
 
@@ -85,16 +87,26 @@ include_once("layouts/header.php");
                             <select name="cantidad" id="select" class="form-control">
                                 <option value="">Selecione el tipo de cantidad del producto</option>
                                 <?php foreach ($cantidadpro as $cantidadpros) : ?>
-                                    <option value="<?= $cantidadpros['idunidad_medida']; ?>" 
-                                    <?php if ($cantidadpros['idunidad_medida'] == $producto['unidad_medida_id']):     echo 'selected'; 
-                                    endif; ?>>
+                                    <option value="<?= $cantidadpros['idunidad_medida']; ?>" <?php if ($cantidadpros['idunidad_medida'] == $producto['unidad_medida_id']) :     echo 'selected';
+                                                                                                endif; ?>>
                                         <?= $cantidadpros['medida']; ?>
                                     </option>
                                 <?php endforeach; ?>
                             </select>
+                        </div> 
+                    </div>
+
+                        <div class="row form-group">
+                            <div class="col col-md-4">
+                                <label for="select" class=" form-control-label">Cantidad del producto</label>
+                            </div>
+                            <div class="col col-md-6">
+                                <input id="cc-pament" name="cantidadpro" type="number" class="form-control" aria-invalid="false" min="0" aria-invalid="false" value="<?= $producto['cantidad'] ?>">
+                            </div>
+
                         </div>
 
-                    </div>
+                   
                     <div class="row form-group">
                         <div class="col col-md-4">
                             <label for="select" class=" form-control-label">Categoria</label>
@@ -103,10 +115,9 @@ include_once("layouts/header.php");
                             <select name="categoria" id="select" class="form-control">
                                 <option value="">Seleccione el tipo de categoria </option>
                                 <?php foreach ($categoria as $categorias) : ?>
-                                    <option value="<?= $categorias['id'] ?>"
-                                    <?php if ($categorias['id'] == $producto['categoria_id']):     
-                                    echo 'selected'; 
-                                    endif; ?>>
+                                    <option value="<?= $categorias['id'] ?>" <?php if ($categorias['id'] == $producto['categoria_id']) :
+                                                                                    echo 'selected';
+                                                                                endif; ?>>
                                         <?= $categorias['nombre']; ?>
                                     </option>
                                 <?php endforeach; ?>
@@ -122,10 +133,9 @@ include_once("layouts/header.php");
                             <select name="estado" id="select" class="form-control">
                                 <option value="">Seleccione el tipo de estado del producto </option>
                                 <?php foreach ($estado as $estados) : ?>
-                                    <option value="<?= $estados['idestado'] ?>"
-                                    <?php if ($estados['idestado'] == $producto['estado_id']):     
-                                    echo 'selected'; 
-                                    endif; ?>>
+                                    <option value="<?= $estados['idestado'] ?>" <?php if ($estados['idestado'] == $producto['estado_id']) :
+                                                                                    echo 'selected';
+                                                                                endif; ?>>
                                         <?= $estados['tipo_estado']; ?>
                                     </option>
                                 <?php endforeach; ?>
@@ -140,10 +150,9 @@ include_once("layouts/header.php");
                             <select name="proveedor" id="select" class="form-control">
                                 <option value="">Seleccione el proveedor</option>
                                 <?php foreach ($proveedores as $proveedor) : ?>
-                                    <option value="<?=  $proveedor['id'] ?>"
-                                    <?php if ($proveedor['id'] == $producto['provedor_id']):     
-                                    echo 'selected'; 
-                                    endif; ?>>
+                                    <option value="<?= $proveedor['id'] ?>" <?php if ($proveedor['id'] == $producto['provedor_id']) :
+                                                                                echo 'selected';
+                                                                            endif; ?>>
                                         <?= $proveedor['nombre']; ?>
                                     </option>
                                 <?php endforeach; ?>
