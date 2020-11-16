@@ -71,6 +71,10 @@
                     <a href="entradas.php?start=0">
                     <i class="fas fa-arrow-right"></i>Entradas</a>
                 </li>
+                <li>
+                    <a href="salidas.php">
+                    <i class="fas fa-shopping-cart"></i>Salidas</a>
+                </li> 
                 <li class="has-sub">
                     <a class="js-arrow" href="#">
                         <i class="fas fa-copy"></i>Paginas</a>
@@ -179,12 +183,16 @@
                     <ul class="list-unstyled navbar__sub-list js-sub-list">
                     <li>
                     <a href="productos.php">
-                    <i class="fas fa-thumb-tack"></i>General Productos</a>
+                    <i class="fas fa-thumb-tack"></i>Principal</a>
                 </li>
                     
                 <li>
                     <a href="entradas.php?start=0">
-                    <i class="fas fa-arrow-right"></i>Entradas</a>
+                    <i class="fas fa-truck"></i>Entradas</a>
+                </li>  
+                <li>
+                    <a href="salidas.php">
+                    <i class="fas fa-shopping-cart"></i>Salidas</a>
                 </li>  
                     </ul>
                 </li>

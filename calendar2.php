@@ -52,7 +52,6 @@ switch($accion){
     
     echo $resultado = json_encode($result);
     break;
-
 }
 
 

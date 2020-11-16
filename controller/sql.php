@@ -185,7 +185,6 @@ function find_all_producto()
 }
 /*--------------------------------------------------------------*/
 /* Funcion para sumar cantidade se productos
-/* FASE BETA
 /*--------------------------------------------------------------*/
 function sum_product($id, $cantidad)
 {
@@ -196,7 +195,7 @@ function sum_product($id, $cantidad)
     $cant_pro = $tabla['cantidad'];
  
     $total = $cantidad + $cant_pro;
-    $sql = $pdo->prepare("UPDATE productos SET cantidad=? WHERE id=" . $id . " LIMIT 1");
+    $sql = "UPDATE productos SET cantidad=? WHERE id=" . $id . " LIMIT 1";
     $result = $pdo->prepare($sql);
     $result->execute([$total]);
 }

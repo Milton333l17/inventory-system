@@ -36,7 +36,7 @@ if (isset($_POST['add_entradas'])) {
 
         $sql = "INSERT INTO entradas(producto_id, cantidad,fecha,login_usuario_id,estado_id) VALUES ('{$producto}','{$cantidad}','{$fecha}','{$user['id']}','{$estado}')";
         if ($pdo->query($sql)) {
-            $suma = sum_product($producto_id,$cantidad);
+            $suma = sum_product($producto,$cantidad);
             $session->msg("s", 'Entrada exitosa!');
             redirect('entradas.php?start=0', false);
             

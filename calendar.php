@@ -38,7 +38,7 @@ $(document).ready(function() {
         $("#calendario").modal();
     },
 
-    events:'http://localhost/inventory-systema/calendar2.php',
+    events:'http://localhost/inventory-system/calendar2.php',
     
     eventClick:function(calEvent,jsEvent,view){
         $('#tituloEvento').html(calEvent.title);
