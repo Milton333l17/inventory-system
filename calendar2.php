@@ -54,12 +54,4 @@ switch($accion){
     break;
 
 }
-
-
-
-
-
-
-
-
 ?>

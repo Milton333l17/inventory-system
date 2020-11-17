@@ -328,8 +328,8 @@
                                     </div>
                                     <div class="account-dropdown__body">
                                         <div class="account-dropdown__item">
-                                            <a href="#">
-                                                <i class="zmdi zmdi-account"></i>Account</a>
+                                            <a href="perfil.php">
+                                                <i class="zmdi zmdi-account"></i>PERFIL</a>
                                         </div>
                                         <div class="account-dropdown__item">
                                             <a href="#">

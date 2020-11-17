@@ -223,3 +223,13 @@ function consul_calendary()
     $resultado = json_encode($result);
     return $resultado;
 }
+
+/*--------------------------------------------------------------*/
+/* perfil usuario
+/*--------------------------------------------------------------*/
+
+ function perfil()
+ {
+     
+ }
+
