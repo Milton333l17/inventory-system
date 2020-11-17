@@ -1,4 +1,5 @@
-<?php $user = current_user() ?>
+<?php $user = current_user();
+is_logged_in(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -66,6 +67,9 @@
             color: white;
         }
         .fc-unthemed td.fc-today{background:#9384}
+        h2{
+            color:white;
+        }
 
     </style>
 

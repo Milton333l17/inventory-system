@@ -24,6 +24,7 @@ class Session {
       $this->user_is_logged_in = true;
     }else{
       $this->user_is_logged_in = false;
+      
     }
 
   }
