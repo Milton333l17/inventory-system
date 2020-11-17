@@ -4,7 +4,6 @@
 require_once('controller/load.php');
 
 
-$entrada =find_all_entradas();
 include_once("layouts/header.php");
 
 

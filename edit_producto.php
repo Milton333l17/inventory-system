@@ -41,7 +41,7 @@ if (isset($_POST['actualizar'])) {
             redirect('formproductos.php', false);
         }
 
-        $sql = "UPDATE productos SET nombre='{$nombreproducto}', descripcion = '{$descripcionprodu}', unidad_medida_id = '{$cantidad}', cantidadpro= '{$cantidadnum}',categoria_id ='{$categoria}', estado_id = '{$estado}', provedor_id = '{$proveedor}' WHERE id='{$id}'";
+        $sql = "UPDATE productos SET nombre='{$nombreproducto}', descripcion = '{$descripcionprodu}', unidad_medida_id = '{$cantidad}', cantidad= $cantidadnum, categoria_id =$categoria, estado_id = $estado, provedor_id = $proveedor WHERE id=$id_pro";
         $result = $pdo->prepare($sql);
         if ($pdo->query($sql)) {
             $session->msg("s", 'Producto Actualizado Exitosamente!');
