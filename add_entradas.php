@@ -26,7 +26,7 @@ if (isset($_POST['add_entradas'])) {
         }
         //validacione fecha 
         $actual= date("Y-m-d");
-        $fechaFormulario = "2020-11-09";
+  
     
         if ($actual >= $fecha) {
             $session->msg("i", "La fecha no debe ser antigua");
@@ -50,6 +50,28 @@ if (isset($_POST['add_entradas'])) {
     }
 }
 
+@$ide = $_GET['identradas'];
+if (isset($_POST['actualizar'])) {
+    $id = $_POST["id"];
+    $producto = $_POST["producto"];
+    $cantidad = $_POST["cantidad_modal"];
+    $fecha = $_POST["fecha_modal"];
+    $estado = $_POST["estado"];
+
+    $verificar = actua_entrada($id,$producto,$cantidad,$fecha,$estado);
+/*UPDATE entradas SET producto_id=33, cantidad=34,fecha=2020-11-17,estado_id=1 WHERE identradas=33
+    $sql = "UPDATE entradas SET producto_id=$producto, cantidad=$cantidad,fecha='{$fecha}',estado_id=$estado WHERE identradas=$id";
+    $result = $pdo->prepare($sql);
+    
+    if($result->execute()){
+        $session->msg("s", 'Entradas actualizada exitosamente!');
+        redirect("entradas.php?start=0", false);
+    }else{
+        $session->msg("d", 'Error al actualizar');
+        redirect("entradas.php?start=0", false);
+    }*/
+}
+
 
 ?>
 <div class="modal-content">
@@ -58,7 +80,7 @@ if (isset($_POST['add_entradas'])) {
 <?php echo display_msg($msg); ?>
     <form action="add_entradas.php" method="POST" autocomplete="off">
         <div class="modal-header">
-            <h5 class="modal-title">Agregar nueva entrada</h5>
+            <h5 class="modal-title">Agregar nueva entrada </h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>

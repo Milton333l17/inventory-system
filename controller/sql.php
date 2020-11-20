@@ -166,7 +166,7 @@ function find_all_entradas($result_to_pages,$starts)
     $numb1= (int)$starts;
     $numb2= (int)$result_to_pages;    
     global $pdo;
-    $sql = $pdo->prepare('SELECT e.identradas, e.cantidad AS cantidad , e.fecha AS fecha, l.nombres, l.apellidos, es.tipo_estado, p.nombre  FROM entradas e  LEFT JOIN login_usuario l ON e.login_usuario_id = l.id LEFT JOIN estado es ON e.estado_id= es.idestado LEFT JOIN productos p ON e.producto_id = p.id ORDER BY identradas DESC LIMIT '.$numb1 .",".$numb2 );
+    $sql = $pdo->prepare('SELECT e.id, e.cantidad AS cantidad , e.fecha AS fecha, l.nombres, l.apellidos, es.tipo_estado, p.nombre  FROM entradas e  LEFT JOIN login_usuario l ON e.login_usuario_id = l.id LEFT JOIN estado es ON e.estado_id= es.idestado LEFT JOIN productos p ON e.producto_id = p.id ORDER BY id DESC LIMIT '.$numb1 .",".$numb2 );
     $sql->execute();
     $result = $sql->fetchAll();
     return $result;
@@ -227,3 +227,58 @@ function is_logged_in(){
         redirect('pagerror.php', false);
     }
 }
+/*--------------------------------------------------------------*/
+/* Función para actualizar entradas
+/*--------------------------------------------------------------*/
+function actua_entrada($id,$pro_nuevo,$cantidad,$fecha,$estado){
+    global $pdo;
+
+    $entrada = find_by_id('entradas', $id) ;
+    $pro_viejo = $entrada['producto_id'];
+    $producto = find_by_id('productos', $pro_nuevo) ;
+    $producto_v = find_by_id('productos', $pro_viejo) ;
+
+    $pro_viejo = $entrada['producto_id'];
+    $cant_vieja = $producto_v['cantidad'];
+    $cant_entradas = $entrada['cantidad'];
+    $cant_producto  = $producto['cantidad'];
+    $cant_restar = ($cant_vieja - $cant_entradas);
+    $cant_sumar = ($cant_producto + $cantidad);
+
+    if($pro_viejo !== $pro_nuevo){
+
+        // Actualizar cantidad del producto antiguo
+        $producto = "UPDATE productos SET cantidad=$cant_restar WHERE id=$pro_viejo";
+        $result1 = $pdo->prepare($producto);
+        $result1->execute();
+
+        // Actualizar cantidad del producto nuevo 
+        $producto = "UPDATE productos SET cantidad=$cant_sumar WHERE id=$pro_nuevo";
+        $result1 = $pdo->prepare($producto);
+        $result1->execute();
+       
+        // Actualizacion de las entradas 
+        $entrada = "UPDATE entradas SET producto_id=$pro_nuevo, cantidad=$cantidad,fecha='{$fecha}',estado_id=$estado WHERE id=$id";
+        $result2 = $pdo->prepare($entrada);
+        if($result2->execute()){
+            redirect("entradas.php?start=0", false);
+        }else{
+            redirect("categorias.php", false);
+        }
+    }elseif($pro_viejo === $pro_nuevo){
+
+        // Actualizacion del producto nueva cantidad
+        $producto = "UPDATE productos SET cantidad=$cantidad WHERE id=$pro_viejo";
+        $result1 = $pdo->prepare($producto);
+        $result1->execute();
+
+        // Actualizacion de las entradas
+        $entrada = "UPDATE entradas SET producto_id=$pro_nuevo, cantidad=$cantidad,fecha='{$fecha}',estado_id=$estado WHERE id=$id";
+        $result2 = $pdo->prepare($entrada);
+        if($result2->execute()){
+            redirect("entradas.php?start=0", false);
+        }else{
+            redirect("categorias.php", false);
+        }
+    }
+} 

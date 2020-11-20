@@ -9,14 +9,17 @@
 </div>
 </div>
 </div>
-
-</div>
-<?php $resultado = consul_calendary(); ?>
-</div>
 <div class="modal" tabindex="-1" id="Modal">
     <div class="modal-dialog">
         <?php include_once($modal); ?>
     </div>
+</div>
+</div>
+<?php $resultado = consul_calendary(); ?>
+</div>
+
+
+
 </div>
 <!-- Jquery JS-->
 <script src="vendor/fullcalendar-3.10.0/lib/jquery.min.js"></script>
