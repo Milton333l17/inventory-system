@@ -7,13 +7,14 @@ $estado = find_all('estado');
 $proveedores = find_all('provedor');
 
 if (isset($_POST['registrar'])) {
-    $req_fields = array('nombrepro', 'descripcion');
+    $req_fields = array('nombrepro', 'descripcion','cantidadpro');
     validate_fields($req_fields);
     
     if(empty($errors)){
        $nombreproducto= $_POST["nombrepro"];
        $descripcionprodu = $_POST["descripcion"];
        $cantidad = (int)$_POST["cantidad"];
+       $cantidadnum = (int)$_POST["cantidadpro"];
        $categoria = (int)$_POST["categoria"];
        $estado = (int)$_POST['estado'];
        $proveedor = (int)$_POST["proveedor"];
@@ -36,7 +37,7 @@ if (isset($_POST['registrar'])) {
             redirect('formproductos.php', false);
         }
 
-        $sql = "INSERT INTO productos (nombre, descripcion, unidad_medida_id, categoria_id, estado_id, provedor_id) VALUES ('{$nombreproducto}','{$descripcionprodu}',{$cantidad}, {$categoria}, {$estado},{$proveedor})";
+        $sql = "INSERT INTO productos (nombre, descripcion, unidad_medida_id,cantidad, categoria_id, estado_id, provedor_id) VALUES ('{$nombreproducto}','{$descripcionprodu}',{$cantidad},{$cantidadnum}, {$categoria}, {$estado},{$proveedor})";
         if($pdo->query($sql)){
             $session->msg("s", 'Producto Registrado Exitosamente!');
             redirect('productos.php', false);
@@ -77,7 +78,7 @@ include_once("layouts/header.php");
                         </div>
                         <div class="col-12 col-md-8">
                             <select name="cantidad" id="select" class="form-control" >
-                                <option value="">Selecione el tipo de cantidad del producto</option>
+                                <option value="">Selecione el tipo de unidad del producto</option>
                                 <?php foreach ($cantidadpro as $cantidad) : ?>
                                     <option value="<?php echo $cantidad['idunidad_medida'] ?>">
                                         <?php echo $cantidad['medida']; ?>
@@ -85,9 +86,17 @@ include_once("layouts/header.php");
                                 <?php endforeach; ?>
                             </select>
                         </div>
-                    
-                        
                     </div>
+
+                    <div class="row form-group">
+                            <div class="col col-md-4">
+                            <label for="select" class=" form-control-label">Cantidad del producto</label>
+                        </div>
+                        <div class="col col-md-4"><input id="cc-pament" name="cantidadpro" type="number" class="form-control"  aria-invalid="false" min="0" ></div>
+                            
+                        </div>          
+
+
                     <div class="row form-group">
                         <div class="col col-md-4">
                             <label for="select" class=" form-control-label">Categoria</label>

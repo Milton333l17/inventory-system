@@ -26,9 +26,8 @@ if (isset($_POST['add_entradas'])) {
         }
         //validacione fecha 
         $actual= date("Y-m-d");
-  
-    
-        if ($actual >= $fecha) {
+
+        if ($actual > $fecha) {
             $session->msg("i", "La fecha no debe ser antigua");
             redirect('entradas.php?start=0', false);
         }

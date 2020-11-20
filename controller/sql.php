@@ -178,7 +178,7 @@ function find_all_entradas($result_to_pages,$starts)
 function find_all_producto()
 {
     global $pdo;
-    $sql = $pdo->prepare('SELECT p.id, p.nombre AS pnombre, c.nombre, p.descripcion, m.medida, e.tipo_estado, pro.nombre AS pronombre FROM productos p LEFT JOIN categorias c ON p.categoria_id= c.id LEFT JOIN unidad_medida m ON p.unidad_medida_id= m.idunidad_medida LEFT JOIN estado e ON p.estado_id= e.idestado LEFT JOIN provedor pro ON p.provedor_id=pro.id');
+    $sql = $pdo->prepare('SELECT p.id, p.nombre AS pnombre, c.nombre, p.descripcion,p.cantidad, m.medida, e.tipo_estado, pro.nombre AS pronombre FROM productos p LEFT JOIN categorias c ON p.categoria_id= c.id LEFT JOIN unidad_medida m ON p.unidad_medida_id= m.idunidad_medida LEFT JOIN estado e ON p.estado_id= e.idestado LEFT JOIN provedor pro ON p.provedor_id=pro.id');
     $sql->execute();
     $result = $sql->fetchAll();
     return $result;
@@ -199,16 +199,23 @@ function sum_product($id, $cantidad)
     $result = $pdo->prepare($sql);
     $result->execute([$total]);
 }
+/*-------------------------------------------------------------*/
+/* Función para selecionar los datos ligados a las salidas
+/*-------------------------------------------------------------*/
+function find_all_salidas()
+{
+    global $pdo;
+    $sql = $pdo->prepare('SELECT e.id, e.cantidad AS cantidad , e.fecha AS fecha, l.nombres, l.apellidos, es.tipo_estado, p.nombre  FROM entradas e LEFT JOIN login_usuario l ON e.login_usuario_id = l.id LEFT JOIN estado es ON e.estado_id= es.idestado LEFT JOIN productos p ON e.producto_id = p.id');
+    $sql->execute();
+    $result = $sql->fetchAll();
+    return $result;
+}
 /*--------------------------------------------------------------*/
 /* Consultar calendario
 /*--------------------------------------------------------------*/
 function consul_calendary()
 {
     global $pdo;
-
-    
-
-
     $calendario = $pdo->prepare("SELECT * FROM calendario");
     $calendario->execute();
     $result = $calendario->fetchAll(PDO::FETCH_ASSOC);
