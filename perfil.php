@@ -78,7 +78,7 @@ include_once("layouts/header.php");
                                 <input id="cc-pament" name="email" type="text" class="form-control" disabled aria-invalid="false" value="<?= $user['email'] ?>">
                             </div>
                         </div>
-                    </div>
+                    </div>                 
                     <div class="form-group">
                         <div class="input-group">
                             <div class="custom-file">
@@ -104,3 +104,4 @@ include_once("layouts/header.php");
 <?php
 include("layouts/footer.php");
 ?>
+

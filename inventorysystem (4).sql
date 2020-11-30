@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.0.3
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-11-2020 a las 23:39:21
--- Versión del servidor: 10.4.11-MariaDB
--- Versión de PHP: 7.4.6
+-- Tiempo de generación: 30-11-2020 a las 23:15:29
+-- Versión del servidor: 10.4.14-MariaDB
+-- Versión de PHP: 7.2.34
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -44,7 +44,9 @@ CREATE TABLE `calendario` (
 INSERT INTO `calendario` (`id`, `title`, `descripcion`, `color`, `textColor`, `start`, `end`) VALUES
 (36, 'salsa', 'rosada', '#c18686', '#000000', '2020-11-22 18:19:00', '0000-00-00 00:00:00'),
 (37, 'perros', 'callejeros', '#ff0000', '#000000', '2020-11-24 19:38:00', '0000-00-00 00:00:00'),
-(38, 'cumpleaños', 'felipe', '#00b3ff', '#e33535', '2020-10-30 10:30:00', '0000-00-00 00:00:00');
+(38, 'cumpleaños', 'felipe', '#00b3ff', '#e33535', '2020-10-30 10:30:00', '0000-00-00 00:00:00'),
+(39, 'sfdgd', 'fdffdf', '#000000', '#000000', '2020-11-04 10:30:00', '0000-00-00 00:00:00'),
+(40, 'Mateo y richard', 'tamaño pelotas tipo nueces', '#ffffff', '#ff0000', '2020-11-24 10:30:00', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -64,8 +66,7 @@ CREATE TABLE `categorias` (
 
 INSERT INTO `categorias` (`id`, `nombre`, `estado`) VALUES
 (1, 'cloroxer', 1),
-(4, 'andres', 1),
-(5, '          ', 1);
+(4, 'andres', 1);
 
 -- --------------------------------------------------------
 
@@ -74,7 +75,7 @@ INSERT INTO `categorias` (`id`, `nombre`, `estado`) VALUES
 --
 
 CREATE TABLE `entradas` (
-  `identradas` int(11) NOT NULL COMMENT 'se guardara el id de las entradas',
+  `id` int(11) NOT NULL COMMENT 'se guardara el id de las entradas',
   `producto_id` int(11) NOT NULL COMMENT 'en este campo se guardara el nombre del producto',
   `cantidad` int(11) NOT NULL COMMENT 'en este campo se guardara la cantidad que llega del producto',
   `fecha` date NOT NULL COMMENT 'en este campo se guardara la hora y la fecha de llegada del producto',
@@ -86,30 +87,12 @@ CREATE TABLE `entradas` (
 -- Volcado de datos para la tabla `entradas`
 --
 
-INSERT INTO `entradas` (`identradas`, `producto_id`, `cantidad`, `fecha`, `login_usuario_id`, `estado_id`) VALUES
-(9, 13, 6, '2020-11-18', 21, 1),
-(10, 11, 78, '2020-11-12', 21, 1),
-(11, 11, 23, '2020-11-11', 21, 1),
-(12, 13, 23, '2020-11-04', 21, 2),
-(13, 11, 9, '2020-11-26', 21, 1),
-(14, 11, 34, '2020-11-04', 21, 1),
-(15, 14, 23, '2020-11-19', 1, 1),
-(16, 13, 34, '2020-11-19', 21, 1),
-(17, 13, 23, '2020-11-05', 21, 1),
-(18, 11, 32, '2020-11-12', 21, 1),
-(19, 13, 43, '2020-11-18', 21, 2),
-(20, 14, 54, '2020-11-18', 21, 2),
-(21, 11, 34, '2020-11-18', 21, 2),
-(22, 14, 23, '2020-11-27', 21, 3),
-(23, 13, 23, '2020-11-20', 21, 2),
-(24, 13, 32, '2020-11-20', 21, 1),
-(25, 14, 54, '2020-11-18', 21, 2),
-(26, 11, 2, '2020-11-26', 21, 2),
-(27, 11, 3, '2020-11-20', 21, 2),
-(28, 15, 67, '2020-11-26', 0, 1),
-(29, 15, 5, '2020-11-19', 21, 1),
-(30, 13, 89, '2020-11-17', 21, 2),
-(31, 14, 23, '2020-11-07', 21, 2);
+INSERT INTO `entradas` (`id`, `producto_id`, `cantidad`, `fecha`, `login_usuario_id`, `estado_id`) VALUES
+(55, 17, 90, '2020-11-21', 21, 3),
+(56, 17, 30, '2020-11-21', 21, 3),
+(57, 18, 40, '2020-11-26', 21, 3),
+(58, 16, 80, '2020-11-25', 21, 3),
+(59, 18, 34, '2020-12-08', 21, 1);
 
 -- --------------------------------------------------------
 
@@ -146,17 +129,18 @@ CREATE TABLE `login_usuario` (
   `email` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
   `estado` int(11) NOT NULL DEFAULT 0,
   `tip_doc_id` int(11) NOT NULL COMMENT 'aqui se guardara la ide del tipo del documento',
-  `rol_id` int(11) NOT NULL COMMENT 'en este campo la persona seleccionara el rol a la que pertenece la persona'
+  `rol_id` int(11) NOT NULL COMMENT 'en este campo la persona seleccionara el rol a la que pertenece la persona',
+  `imagen_url` varchar(255) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `login_usuario`
 --
 
-INSERT INTO `login_usuario` (`id`, `documento`, `nombres`, `apellidos`, `password`, `email`, `estado`, `tip_doc_id`, `rol_id`) VALUES
-(1, 1001995096, 'Stephen', 'Alarcon', '$2y$10$cXajR4X9FoEu/ZSp0QuJW.hPbBoyZmWS65QXbI7At/UklWk4pbDcS', 'stephen@gmail.com', 0, 1, 1),
-(20, 1006656642, 'milton', 'araque', '$2y$10$bLf35K3URKfc7xdl28AryenhuvleONdnSPUlsAJz0D6ePQU9WUKb.', 'milton333l@hotmail.com', 1, 2, 1),
-(21, 1000776005, 'Andres ', 'Cristancho', '$2y$10$Wy0dLWOm8C3/vXu9bQDOQ.IOaKQu4KWVamv6EIjXvPI/8RUXRNe0u', 'afcristancho5@misena.edu.co', 0, 2, 1);
+INSERT INTO `login_usuario` (`id`, `documento`, `nombres`, `apellidos`, `password`, `email`, `estado`, `tip_doc_id`, `rol_id`, `imagen_url`) VALUES
+(1, 1001995096, 'Stephen', 'Alarcon', '$2y$10$AV0eTpAMvQpRuxc2AsSxS.V/Z7vKcE.agFIFpCtbArNcdyH6IMc3a', 'stephen@gmail.com', 0, 1, 1, 'richard.jpg'),
+(20, 1006656642, 'milton', 'araque', '$2y$10$bLf35K3URKfc7xdl28AryenhuvleONdnSPUlsAJz0D6ePQU9WUKb.', 'milton333l@hotmail.com', 1, 2, 1, 'pintico.jpg'),
+(21, 1000776005, 'andres', 'Cristancho', '$2y$10$YQk7G3ipgEe9EmpFJtWqZeTiN2VO48YVCoP93T2dEsUdgLfVKsD1y', 'afcristancho5@misena.edu.co', 0, 2, 1, 'pikachu.jpg');
 
 -- --------------------------------------------------------
 
@@ -180,10 +164,10 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id`, `nombre`, `descripcion`, `unidad_medida_id`, `categoria_id`, `estado_id`, `provedor_id`, `cantidad`) VALUES
-(11, 'huesos', 'para perros ', 2, 4, 3, 21, 0),
-(13, 'huesos gatos', 'para trepadores', 1, 4, 2, 20, 0),
-(14, 'latigos', 'para castigar perros y perras', 1, 4, 3, 20, 0),
-(15, 'dispensador', 'dfdsfdsf', 1, 1, 2, 22, 0);
+(16, 'PELOTAS', 'PARA JUGAR CON EL PERRO', 1, 4, 3, 20, 80),
+(17, 'LATIGOS', 'PARA CARTIGAR A PERROS Y PERRAS', 1, 4, 3, 22, 120),
+(18, 'ARROZ', 'DELICIOSOS ARROZ', 1, 1, 1, 20, 74),
+(19, 'CONDONES', 'MAYOR PROTECCION NO VENDRIA MAL Y UN HIJO PERDIDO MENOS?', 1, 4, 2, 20, 40);
 
 -- --------------------------------------------------------
 
@@ -300,7 +284,7 @@ ALTER TABLE `categorias`
 -- Indices de la tabla `entradas`
 --
 ALTER TABLE `entradas`
-  ADD PRIMARY KEY (`identradas`),
+  ADD PRIMARY KEY (`id`),
   ADD KEY `estado_idestado` (`estado_id`),
   ADD KEY `producto_id` (`producto_id`);
 
@@ -365,7 +349,7 @@ ALTER TABLE `unidad_medida`
 -- AUTO_INCREMENT de la tabla `calendario`
 --
 ALTER TABLE `calendario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT de la tabla `categorias`
@@ -377,7 +361,7 @@ ALTER TABLE `categorias`
 -- AUTO_INCREMENT de la tabla `entradas`
 --
 ALTER TABLE `entradas`
-  MODIFY `identradas` int(11) NOT NULL AUTO_INCREMENT COMMENT 'se guardara el id de las entradas', AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'se guardara el id de las entradas', AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT de la tabla `estado`
@@ -395,7 +379,7 @@ ALTER TABLE `login_usuario`
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de la tabla `provedor`

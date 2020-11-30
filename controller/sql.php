@@ -289,3 +289,19 @@ function actua_entrada($id,$pro_nuevo,$cantidad,$fecha,$estado){
         }
     }
 } 
+
+
+function verify_password($id,$password){
+    global $pdo;
+    $sql = "SELECT password FROM login_usuario WHERE id=:id";
+    $result = $pdo->prepare($sql);
+    $result->bindParam('id', $id, PDO::PARAM_INT);
+
+    $result->execute();
+    if ($result->rowCount() == 1) {
+        $user = $result->fetch(PDO::FETCH_ASSOC);
+        if (password_verify($password, $user['password'])) {
+            return $password = password_verify($password, $user['password']);
+        }
+    }
+}
