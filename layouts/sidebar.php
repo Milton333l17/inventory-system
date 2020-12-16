@@ -3,7 +3,7 @@
     <div class="header-mobile__bar">
         <div class="container-fluid">
             <div class="header-mobile-inner">
-                <a class="logo" href="index.html">
+                <a class="logo" href="index.php">
                     <img src="images/icon/logo.png" alt="Inventory System" />
                 </a>
                 <button class="hamburger hamburger--slider" type="button">
@@ -22,7 +22,7 @@
                         <i class="fas fa-tachometer-alt"></i>Panel de control</a>
                     <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
                         <li>
-                            <a href="index.html">Panel de control 1</a>
+                            <a href="index.php">Panel de control 1</a>
                         </li>
                         <li>
                             <a href="index2.html">Panel de control 2</a>
@@ -147,7 +147,7 @@
             <ul class="list-unstyled navbar__list">
 
                 <li>
-                    <a href="index.html">
+                    <a href="index.php">
                         <i class="fas fa-tachometer-alt"></i>Inicio </a>
                 </li>
                 <li class="has-sub">
@@ -340,7 +340,7 @@
                                                 <i class="zmdi zmdi-account"></i>PERFIL</a>
                                         </div>
                                         <div class="account-dropdown__item">
-                                            <a href="contrasena.php">
+                                            <a href="contrasena.php ">
                                                 <i class="zmdi zmdi-settings"></i>CAMBIO CONTRASEÑA</a>
                                         </div>
                                     </div>

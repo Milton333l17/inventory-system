@@ -54,7 +54,7 @@ if ($session->isUserLoggedIn(true)) {
     <button type="submit" class="btn btn-danger"><i class="fas fa-arrow-right"></i></button>
     <p class="text-center">Copyright © 2020 Inventory System.</p>
   </form>
-
+  
   <!-- Jquery JS-->
   <script src="vendor/jquery-3.2.1.min.js"></script>
   <!-- Bootstrap JS-->

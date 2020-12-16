@@ -289,8 +289,20 @@ function actua_entrada($id,$pro_nuevo,$cantidad,$fecha,$estado){
         }
     }
 } 
-
-
+/*-------------------------------------------------------------*/
+/* Función para selecionar todos los registros de una tabla
+/*-------------------------------------------------------------*/
+function cant_product()
+{
+    global $pdo;
+    $sql = $pdo->prepare('Select * from login_usuario');
+    $sql->execute();
+    $result = $sql->fetchAll();
+    return $result;
+}
+/*-------------------------------------------------------------*/
+/* Función para verificar contraseñas de la base datos 
+/*-------------------------------------------------------------*/
 function verify_password($id,$password){
     global $pdo;
     $sql = "SELECT password FROM login_usuario WHERE id=:id";

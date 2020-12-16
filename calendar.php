@@ -10,7 +10,7 @@ include_once("layouts/header.php");
 
                         <div class="row">
                             <div class="col">
-                              <div class="au-card" >
+                              <div class="au-card-fc" >
                                 <div id="calendar"></div>
                               </div>
                              

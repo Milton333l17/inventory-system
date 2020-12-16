@@ -56,7 +56,7 @@ is_logged_in(); ?>
             background: #9384;
             color: white;
         }
-        .au-card{
+        .au-card-fc{
             background:url('images/fondo_espacio.jpg');
          background-repeat: no-repeat;
             background-size: cover;
@@ -68,7 +68,7 @@ is_logged_in(); ?>
         }
         .fc-unthemed td.fc-today{background:#9384}
         h2{
-            color:white;
+            color:black;
         }
 
     </style>
