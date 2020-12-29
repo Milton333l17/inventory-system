@@ -317,3 +317,20 @@ function verify_password($id,$password){
         }
     }
 }
+
+/*--------------------------------------------------------------*/
+/* Funcion para restar cantidades
+/*--------------------------------------------------------------*/
+function restar_producto($id, $cantidad)
+{
+    global $pdo;
+
+    $id_producto =  (int)$id;
+    $tabla = find_by_id('productos', $id_producto);
+    $cant_pro = $tabla['cantidad'];
+ 
+    $total = $cant_pro - $cantidad;
+    $sql = "UPDATE productos SET cantidad=? WHERE id=" . $id . " LIMIT 1";
+    $result = $pdo->prepare($sql);
+    $result->execute([$total]);
+}
