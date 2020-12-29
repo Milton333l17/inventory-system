@@ -1,21 +1,15 @@
--- phpMyAdmin SQL Dump
--- version 5.0.3
+﻿-- phpMyAdmin SQL Dump
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-11-2020 a las 23:15:29
+-- Tiempo de generación: 29-12-2020 a las 22:31:12
 -- Versión del servidor: 10.4.14-MariaDB
--- Versión de PHP: 7.2.34
+-- Versión de PHP: 7.4.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Base de datos: `inventorysystem`
@@ -139,7 +133,7 @@ CREATE TABLE `login_usuario` (
 
 INSERT INTO `login_usuario` (`id`, `documento`, `nombres`, `apellidos`, `password`, `email`, `estado`, `tip_doc_id`, `rol_id`, `imagen_url`) VALUES
 (1, 1001995096, 'Stephen', 'Alarcon', '$2y$10$AV0eTpAMvQpRuxc2AsSxS.V/Z7vKcE.agFIFpCtbArNcdyH6IMc3a', 'stephen@gmail.com', 0, 1, 1, 'richard.jpg'),
-(20, 1006656642, 'milton', 'araque', '$2y$10$bLf35K3URKfc7xdl28AryenhuvleONdnSPUlsAJz0D6ePQU9WUKb.', 'milton333l@hotmail.com', 1, 2, 1, 'pintico.jpg'),
+(20, 1006656642, 'milton', 'araque', '$2y$10$bLf35K3URKfc7xdl28AryenhuvleONdnSPUlsAJz0D6ePQU9WUKb.', 'milton333l@hotmail.com', 1, 2, 1, 'c20.jpg'),
 (21, 1000776005, 'andres', 'Cristancho', '$2y$10$YQk7G3ipgEe9EmpFJtWqZeTiN2VO48YVCoP93T2dEsUdgLfVKsD1y', 'afcristancho5@misena.edu.co', 0, 2, 1, 'pikachu.jpg');
 
 -- --------------------------------------------------------
@@ -164,8 +158,8 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id`, `nombre`, `descripcion`, `unidad_medida_id`, `categoria_id`, `estado_id`, `provedor_id`, `cantidad`) VALUES
-(16, 'PELOTAS', 'PARA JUGAR CON EL PERRO', 1, 4, 3, 20, 80),
-(17, 'LATIGOS', 'PARA CARTIGAR A PERROS Y PERRAS', 1, 4, 3, 22, 120),
+(16, 'PELOTAS', 'PARA JUGAR CON EL PERRO', 1, 4, 3, 20, 55),
+(17, 'LATIGOS', 'PARA CARTIGAR A PERROS Y PERRAS', 1, 4, 3, 22, 0),
 (18, 'ARROZ', 'DELICIOSOS ARROZ', 1, 1, 1, 20, 74),
 (19, 'CONDONES', 'MAYOR PROTECCION NO VENDRIA MAL Y UN HIJO PERDIDO MENOS?', 1, 4, 2, 20, 40);
 
@@ -218,11 +212,24 @@ INSERT INTO `rol` (`idRol`, `rol`) VALUES
 --
 
 CREATE TABLE `salida` (
-  `idsalida` int(11) NOT NULL COMMENT 'se guarda la id del la salidas',
-  `nombre_clien` varchar(45) COLLATE utf8_spanish_ci NOT NULL COMMENT 'se guarda el nombre del cliente que compro el producto',
-  `fecha y hora` varchar(45) COLLATE utf8_spanish_ci NOT NULL COMMENT 'se guardad la fecha y hora de salida del producto',
-  `cantidad` varchar(45) COLLATE utf8_spanish_ci NOT NULL COMMENT 'se guarda la cantidad del producto '
+  `id` int(11) NOT NULL COMMENT 'se guarda la id del la salidas',
+  `nombre_cliente` varchar(45) COLLATE utf8_spanish_ci NOT NULL COMMENT 'se guarda el nombre del cliente que compro el producto',
+  `fecha y hora` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp() COMMENT 'se guardad la fecha y hora de salida del producto',
+  `cantidad` varchar(45) COLLATE utf8_spanish_ci NOT NULL COMMENT 'se guarda la cantidad del producto ',
+  `producto_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `salida`
+--
+
+INSERT INTO `salida` (`id`, `nombre_cliente`, `fecha y hora`, `cantidad`, `producto_id`) VALUES
+(1, 'pedro', '2020-12-29 20:19:49', '20', 16),
+(2, 'marcos', '2020-12-29 21:08:07', '15', 16),
+(3, 'maria', '2020-12-29 21:09:17', '20', 17),
+(4, 'marcos', '2020-12-29 21:11:22', '20', 17),
+(6, 'andres', '2020-12-29 21:20:26', '80', 17),
+(8, 'marcos', '2020-12-29 21:22:43', '10', 16);
 
 -- --------------------------------------------------------
 
@@ -329,6 +336,13 @@ ALTER TABLE `rol`
   ADD UNIQUE KEY `rol` (`rol`);
 
 --
+-- Indices de la tabla `salida`
+--
+ALTER TABLE `salida`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `producto_id` (`producto_id`);
+
+--
 -- Indices de la tabla `tip_doc`
 --
 ALTER TABLE `tip_doc`
@@ -388,6 +402,12 @@ ALTER TABLE `provedor`
   MODIFY `id` int(20) NOT NULL AUTO_INCREMENT COMMENT 'se guarda la id del provedor', AUTO_INCREMENT=23;
 
 --
+-- AUTO_INCREMENT de la tabla `salida`
+--
+ALTER TABLE `salida`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'se guarda la id del la salidas', AUTO_INCREMENT=9;
+
+--
 -- AUTO_INCREMENT de la tabla `unidad_medida`
 --
 ALTER TABLE `unidad_medida`
@@ -412,8 +432,10 @@ ALTER TABLE `productos`
   ADD CONSTRAINT `productos_ibfk_2` FOREIGN KEY (`provedor_id`) REFERENCES `provedor` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `productos_ibfk_3` FOREIGN KEY (`unidad_medida_id`) REFERENCES `unidad_medida` (`idunidad_medida`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `productos_ibfk_4` FOREIGN KEY (`estado_id`) REFERENCES `estado` (`idestado`) ON DELETE CASCADE ON UPDATE CASCADE;
-COMMIT;
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+--
+-- Filtros para la tabla `salida`
+--
+ALTER TABLE `salida`
+  ADD CONSTRAINT `salida_ibfk_1` FOREIGN KEY (`producto_id`) REFERENCES `productos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
