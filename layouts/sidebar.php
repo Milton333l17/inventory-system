@@ -1,10 +1,10 @@
 <!-- HEADER MOBILE-->
 <header class="header-mobile d-block d-lg-none">
-    <div class="header-mobile__bar">
-        <div class="container-fluid">
+    <div class="header-mobile__bar" style="padding:0;">
+        <div class="container-fluid" style="padding-left:0;">
             <div class="header-mobile-inner">
                 <a class="logo" href="index.php">
-                    <img src="images/icon/logo.png" alt="Inventory System" />
+                    <img src="images/icon/LOGO2.PNG" style="width:200px;" alt="Inventory Systema" />
                 </a>
                 <button class="hamburger hamburger--slider" type="button">
                     <span class="hamburger-box">
@@ -75,60 +75,6 @@
                     <a href="salidas.php">
                     <i class="fas fa-shopping-cart"></i>Salidas</a>
                 </li> 
-                <li class="has-sub">
-                    <a class="js-arrow" href="#">
-                        <i class="fas fa-copy"></i>Paginas</a>
-                    <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                        <li>
-                            <a href="login.html">Login</a>
-                        </li>
-                        <li>
-                            <a href="register.html">Registro</a>
-                        </li>
-                        <li>
-                            <a href="forget-pass.html">Contraseña olvidada</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="has-sub">
-                    <a class="js-arrow" href="#">
-                        <i class="fas fa-desktop"></i>Elementos</a>
-                    <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                        <li>
-                            <a href="button.html">Botones</a>
-                        </li>
-                        <li>
-                            <a href="badge.html">Badges</a>
-                        </li>
-                        <li>
-                            <a href="tab.html">Tabs</a>
-                        </li>
-                        <li>
-                            <a href="card.html">Cards</a>
-                        </li>
-                        <li>
-                            <a href="alert.html">Alerts</a>
-                        </li>
-                        <li>
-                            <a href="progress-bar.html">Progress Bars</a>
-                        </li>
-                        <li>
-                            <a href="modal.html">Modals</a>
-                        </li>
-                        <li>
-                            <a href="switch.html">Switchs</a>
-                        </li>
-                        <li>
-                            <a href="grid.html">Grids</a>
-                        </li>
-                        <li>
-                            <a href="fontawesome.html">Fontawesome Icon</a>
-                        </li>
-                        <li>
-                            <a href="typo.html">Typography</a>
-                        </li>
-                    </ul>
-                </li>
             </ul>
         </div>
     </nav>
@@ -137,9 +83,9 @@
 <!-- MENU SIDEBAR-->
 
 <aside class="menu-sidebar d-none d-lg-block">
-    <div class="logo">
+    <div class="logo" style="padding:0px;">
         <a href="#">
-            <img src="images/icon/logo.png" alt="Cool Admin" />
+            <img src="images/icon/LOGO2.png" style="width:500px;margin-top:0px;height:80px;" alt="Cool Admin" />
         </a>
     </div>
     <div class="menu-sidebar__content js-scrollbar1">
@@ -196,61 +142,6 @@
                 </li>  
                     </ul>
                 </li>
-            
-                <li class="has-sub">
-                    <a class="js-arrow" href="#">
-                        <i class="fas fa-copy"></i>Paginas</a>
-                    <ul class="list-unstyled navbar__sub-list js-sub-list">
-                        <li>
-                            <a href="login.html">Login</a>
-                        </li>
-                        <li>
-                            <a href="register.html">Registro</a>
-                        </li>
-                        <li>
-                            <a href="forget-pass.html">Contraseña olvidada</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="has-sub">
-                    <a class="js-arrow" href="#">
-                        <i class="fas fa-desktop"></i> Elements</a>
-                    <ul class="list-unstyled navbar__sub-list js-sub-list">
-                        <li>
-                            <a href="button.html">Button</a>
-                        </li>
-                        <li>
-                            <a href="badge.html">Badges</a>
-                        </li>
-                        <li>
-                            <a href="tab.html">Tabs</a>
-                        </li>
-                        <li>
-                            <a href="card.html">Cards</a>
-                        </li>
-                        <li>
-                            <a href="alert.html">Alerts</a>
-                        </li>
-                        <li>
-                            <a href="progress-bar.html">Progress Bars</a>
-                        </li>
-                        <li>
-                            <a href="modal.html">Modals</a>
-                        </li>
-                        <li>
-                            <a href="switch.html">Switchs</a>
-                        </li>
-                        <li>
-                            <a href="grid.html">Grids</a>
-                        </li>
-                        <li>
-                            <a href="fontawesome.html">Fontawesome Icon</a>
-                        </li>
-                        <li>
-                            <a href="typo.html">Typography</a>
-                        </li>
-                    </ul>
-                </li>
             </ul>
         </nav>
     </div>
@@ -271,45 +162,6 @@
                         <div class="noti-wrap">
 
                             <div class="noti__item js-item-menu">
-                            </div>
-                            <div class="noti__item js-item-menu">
-                                <i class="zmdi zmdi-notifications"></i>
-                                <span class="quantity">3</span>
-                                <div class="notifi-dropdown js-dropdown">
-                                    <div class="notifi__title">
-                                        <p>You have 3 Notifications</p>
-                                    </div>
-                                    <div class="notifi__item">
-                                        <div class="bg-c1 img-cir img-40">
-                                            <i class="zmdi zmdi-email-open"></i>
-                                        </div>
-                                        <div class="content">
-                                            <p>You got a email notification</p>
-                                            <span class="date">April 12, 2018 06:50</span>
-                                        </div>
-                                    </div>
-                                    <div class="notifi__item">
-                                        <div class="bg-c2 img-cir img-40">
-                                            <i class="zmdi zmdi-account-box"></i>
-                                        </div>
-                                        <div class="content">
-                                            <p>Your account has been blocked</p>
-                                            <span class="date">April 12, 2018 06:50</span>
-                                        </div>
-                                    </div>
-                                    <div class="notifi__item">
-                                        <div class="bg-c3 img-cir img-40">
-                                            <i class="zmdi zmdi-file-text"></i>
-                                        </div>
-                                        <div class="content">
-                                            <p>You got a new file</p>
-                                            <span class="date">April 12, 2018 06:50</span>
-                                        </div>
-                                    </div>
-                                    <div class="notifi__footer">
-                                        <a href="#">All notifications</a>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                         <div class="account-wrap">
