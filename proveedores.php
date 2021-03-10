@@ -15,9 +15,10 @@ include_once("layouts/header.php");
 <h3 class="title-5 m-b-35">Proveedores</h3>
 <div class="table-data__tool">
     <div class="table-data__tool-right">
-        <button type="button" class="btn btn-success openBtn" data-toggle="modal" data-target="#Modal">
+        <button  type="button" class="btn btn-success openBtn mr-5" data-toggle="modal" data-target="#Modal">
             <i class="fa fa-plus mr-1" aria-hidden="true"></i>Crear Proveedor
         </button>
+
     </div>
 </div>
 <div class="table-responsive">

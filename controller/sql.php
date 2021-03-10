@@ -90,26 +90,28 @@ function verify_doc($doc)
 /*--------------------------------------------------------------*/
 /* Función para verificar email existente
 /*--------------------------------------------------------------*/
+
 function verify_email($email)
 {
     global $pdo;
-    $sql = "SELECT email FROM login_usuario WHERE email=$email";
+    $sql = "SELECT email FROM login_usuario WHERE email=?";
     $result = $pdo->prepare($sql);
-    $result->execute();
+    $result->execute(array($email));
     if ($result->rowCount() > 0) {
         return true;
     }
     return false;
 }
+
 /*--------------------------------------------------------------*/
 /* Función para verificar categoría existente
 /*--------------------------------------------------------------*/
 function verify_category($category)
 {
     global $pdo;
-    $sql = "SELECT nombre FROM categorias WHERE nombre=$category";
+    $sql = "SELECT nombre FROM categorias WHERE nombre=?";
     $result = $pdo->prepare($sql);
-    $result->execute();
+    $result->execute(array($category));
     if ($result->rowCount() > 0) {
         return true;
     }
@@ -118,11 +120,15 @@ function verify_category($category)
 /*--------------------------------------------------------------*/
 /* Función para verificar proveedor existente
 /*--------------------------------------------------------------*/
+
 function verify_proveedor($nombre, $telefono, $direccion)
 {
     global $pdo;
-    $sql = "SELECT * FROM provedor WHERE nombre=$nombre ,telefono=$telefono, direccion=$direccion  ";
+    $sql = "SELECT * FROM provedor WHERE telefono= :telefono OR nombre=:nombre OR  direccion=:direccion ";
     $result = $pdo->prepare($sql);
+    $result->bindParam(':telefono', $telefono);
+    $result->bindParam(':nombre', $nombre);
+    $result->bindParam(':direccion', $direccion);
     $result->execute();
     if ($result->rowCount() > 0) {
         return true;
@@ -161,12 +167,12 @@ function verify_productos($productos)
 /*-------------------------------------------------------------*/
 /* Función para selecionar los datos ligados a las enttrada 
 /*-------------------------------------------------------------*/
-function find_all_entradas($result_to_pages,$starts)
-{   
-    $numb1= (int)$starts;
-    $numb2= (int)$result_to_pages;    
+function find_all_entradas($result_to_pages, $starts)
+{
+    $numb1 = (int)$starts;
+    $numb2 = (int)$result_to_pages;
     global $pdo;
-    $sql = $pdo->prepare('SELECT e.id, e.cantidad AS cantidad , e.fecha AS fecha, l.nombres, l.apellidos, es.tipo_estado, p.nombre  FROM entradas e  LEFT JOIN login_usuario l ON e.login_usuario_id = l.id LEFT JOIN estado es ON e.estado_id= es.idestado LEFT JOIN productos p ON e.producto_id = p.id ORDER BY id DESC LIMIT '.$numb1 .",".$numb2 );
+    $sql = $pdo->prepare('SELECT e.id, e.cantidad AS cantidad , e.fecha AS fecha, l.nombres, l.apellidos, es.tipo_estado, p.nombre  FROM entradas e  LEFT JOIN login_usuario l ON e.login_usuario_id = l.id LEFT JOIN estado es ON e.estado_id= es.idestado LEFT JOIN productos p ON e.producto_id = p.id ORDER BY id DESC LIMIT ' . $numb1 . "," . $numb2);
     $sql->execute();
     $result = $sql->fetchAll();
     return $result;
@@ -193,7 +199,7 @@ function sum_product($id, $cantidad)
     $id_producto =  (int)$id;
     $tabla = find_by_id('productos', $id_producto);
     $cant_pro = $tabla['cantidad'];
- 
+
     $total = $cantidad + $cant_pro;
     $sql = "UPDATE productos SET cantidad=? WHERE id=" . $id . " LIMIT 1";
     $result = $pdo->prepare($sql);
@@ -225,25 +231,27 @@ function consul_calendary()
 /*--------------------------------------------------------------*/
 /* Función para verificar usuario logeado
 /*--------------------------------------------------------------*/
-function is_logged_in(){
+function is_logged_in()
+{
     global $session;
     $current_user = current_user();
     //Si el usuario esta logeado
-    if(!$session->isUserLoggedIn(true)){
- 
+    if (!$session->isUserLoggedIn(true)) {
+
         redirect('pagerror.php', false);
     }
 }
 /*--------------------------------------------------------------*/
 /* Función para actualizar entradas
 /*--------------------------------------------------------------*/
-function actua_entrada($id,$pro_nuevo,$cantidad,$fecha,$estado){
+function actua_entrada($id, $pro_nuevo, $cantidad, $fecha, $estado)
+{
     global $pdo;
 
-    $entrada = find_by_id('entradas', $id) ;
+    $entrada = find_by_id('entradas', $id);
     $pro_viejo = $entrada['producto_id'];
-    $producto = find_by_id('productos', $pro_nuevo) ;
-    $producto_v = find_by_id('productos', $pro_viejo) ;
+    $producto = find_by_id('productos', $pro_nuevo);
+    $producto_v = find_by_id('productos', $pro_viejo);
 
     $pro_viejo = $entrada['producto_id'];
     $cant_vieja = $producto_v['cantidad'];
@@ -252,7 +260,7 @@ function actua_entrada($id,$pro_nuevo,$cantidad,$fecha,$estado){
     $cant_restar = ($cant_vieja - $cant_entradas);
     $cant_sumar = ($cant_producto + $cantidad);
 
-    if($pro_viejo !== $pro_nuevo){
+    if ($pro_viejo !== $pro_nuevo) {
 
         // Actualizar cantidad del producto antiguo
         $producto = "UPDATE productos SET cantidad=$cant_restar WHERE id=$pro_viejo";
@@ -263,16 +271,16 @@ function actua_entrada($id,$pro_nuevo,$cantidad,$fecha,$estado){
         $producto = "UPDATE productos SET cantidad=$cant_sumar WHERE id=$pro_nuevo";
         $result1 = $pdo->prepare($producto);
         $result1->execute();
-       
+
         // Actualizacion de las entradas 
         $entrada = "UPDATE entradas SET producto_id=$pro_nuevo, cantidad=$cantidad,fecha='{$fecha}',estado_id=$estado WHERE id=$id";
         $result2 = $pdo->prepare($entrada);
-        if($result2->execute()){
+        if ($result2->execute()) {
             redirect("entradas.php?start=0", false);
-        }else{
+        } else {
             redirect("categorias.php", false);
         }
-    }elseif($pro_viejo === $pro_nuevo){
+    } elseif ($pro_viejo === $pro_nuevo) {
 
         // Actualizacion del producto nueva cantidad
         $producto = "UPDATE productos SET cantidad=$cantidad WHERE id=$pro_viejo";
@@ -282,13 +290,13 @@ function actua_entrada($id,$pro_nuevo,$cantidad,$fecha,$estado){
         // Actualizacion de las entradas
         $entrada = "UPDATE entradas SET producto_id=$pro_nuevo, cantidad=$cantidad,fecha='{$fecha}',estado_id=$estado WHERE id=$id";
         $result2 = $pdo->prepare($entrada);
-        if($result2->execute()){
+        if ($result2->execute()) {
             redirect("entradas.php?start=0", false);
-        }else{
+        } else {
             redirect("categorias.php", false);
         }
     }
-} 
+}
 /*-------------------------------------------------------------*/
 /* Función para selecionar todos los registros de una tabla
 /*-------------------------------------------------------------*/
@@ -303,7 +311,8 @@ function cant_product()
 /*-------------------------------------------------------------*/
 /* Función para verificar contraseñas de la base datos 
 /*-------------------------------------------------------------*/
-function verify_password($id,$password){
+function verify_password($id, $password)
+{
     global $pdo;
     $sql = "SELECT password FROM login_usuario WHERE id=:id";
     $result = $pdo->prepare($sql);
@@ -328,7 +337,7 @@ function restar_producto($id, $cantidad)
     $id_producto =  (int)$id;
     $tabla = find_by_id('productos', $id_producto);
     $cant_pro = $tabla['cantidad'];
- 
+
     $total = $cant_pro - $cantidad;
     $sql = "UPDATE productos SET cantidad=? WHERE id=" . $id . " LIMIT 1";
     $result = $pdo->prepare($sql);

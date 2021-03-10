@@ -32,13 +32,13 @@ if (isset($_POST['registrar'])) {
             $session->msg("w", "Documento ya existente.");
             redirect('form.php', false);
         }
-
+/*
         if(verify_email($email)){
             $session->msg("w", "Email ya existente.");
             redirect('form.php', false);
-        }
+        }*/
 
-        $sql = "INSERT INTO login_usuario(documento, nombres, apellidos, email, password, tip_doc_id, rol_id) VALUES ({$documento},'{$nombre}','{$apellidos}', '{$email}', '{$contrasena}',{$tipodoc}, {$rol})";
+        $sql = "INSERT INTO login_usuario(documento, nombres, apellidos, password, email, tip_doc_id, rol_id) VALUES ({$documento},'{$nombre}','{$apellidos}', '{$contrasena}','{$email}' ,{$tipodoc}, {$rol})";
         if($pdo->query($sql)){
             $session->msg("s", 'Usuario registrado exitosamente!');
             redirect('usuarios.php', false);

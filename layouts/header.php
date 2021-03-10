@@ -70,7 +70,11 @@ is_logged_in(); ?>
         h2{
             color:black;
         }
-
+        .colo{
+            color:white;
+    
+        }
+  
     </style>
 
 </head>

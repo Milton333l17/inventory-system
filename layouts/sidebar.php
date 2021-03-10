@@ -1,3 +1,4 @@
+
 <!-- HEADER MOBILE-->
 <header class="header-mobile d-block d-lg-none">
     <div class="header-mobile__bar" style="padding:0;">
@@ -18,47 +19,36 @@
         <div class="container-fluid">
             <ul class="navbar-mobile__list list-unstyled">
                 <li class="has-sub">
-                    <a class="js-arrow" href="#">
+                    <a class="js-arrow " href="#" style="color:white;">
                         <i class="fas fa-tachometer-alt"></i>Panel de control</a>
                     <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
                         <li>
-                            <a href="index.php">Panel de control 1</a>
-                        </li>
-                        <li>
-                            <a href="index2.html">Panel de control 2</a>
-                        </li>
-                        <li>
-                            <a href="index3.html">Panel de control 3</a>
-                        </li>
-                        <li>
-                            <a href="index4.html">Panel de control 4</a>
+                            <a href="index.php">Inicio</a>
                         </li>
                     </ul>
                 </li>
+                >
                 <li>
-                    <a href="chart.html">
-                        <i class="fas fa-chart-bar"></i>Graficos</a>
-                </li>
-                <li>
-                    <a href="table.html">
-                        <i class="fas fa-table"></i>Tablas</a>
-                </li>
-                <li>
+                
                     <a href="form.php">
                         <i class="far fa-check-square"></i>Registro</a>
                 </li>
+                   
                 <li>
                     <a href="usuarios.php">
-                        <i class="fas fa-user"></i>Usuarios</a>
+                        <i class="fas fa-user"></i>Usuarios </a>
                 </li>
+                
                 <li>
                     <a href="categorias.php">
                         <i class="fas fa-anchor"></i>Categorias</a>
                 </li>
+                <?php if($user['rol_id'] == 1): ?>
                 <li>
                     <a href="proveedores.php">
                         <i class="fas fa-users"></i>Proveedor</a>
                 </li>
+                <?php endif ?>
                 <li>
                     <a href="calendar.php">
                         <i class="fas fa-calendar-alt"></i>Calendario</a>
@@ -82,63 +72,71 @@
 <!-- END HEADER MOBILE-->
 <!-- MENU SIDEBAR-->
 
+
+
 <aside class="menu-sidebar d-none d-lg-block">
-    <div class="logo" style="padding:0px;">
+    <div class="logo" style="padding:0px;border-color:#090909;">
         <a href="#">
             <img src="images/icon/LOGO2.png" style="width:500px;margin-top:0px;height:80px;" alt="Cool Admin" />
         </a>
     </div>
-    <div class="menu-sidebar__content js-scrollbar1">
+    <div class="menu-sidebar__content js-scrollbar1" style="background-color:#090909;">
         <nav class="navbar-sidebar">
             <ul class="list-unstyled navbar__list">
 
                 <li>
-                    <a href="index.php">
-                        <i class="fas fa-tachometer-alt"></i>Inicio </a>
+                    <a href="index.php" style="color:white;" >
+                        <i class="fas fa-tachometer-alt colo" ></i>Inicio </a>
                 </li>
+                <?php if($user['rol_id'] == 1): ?>
                 <li class="has-sub">
-                    <a class="js-arrow" href="#">
-                        <i class="fas fa-user"></i>Usuario</a>
+                    <a class="js-arrow" href="#" style="color:white;">
+                        <i class="fas fa-user colo"></i>Usuario</a>
                     <ul class="list-unstyled navbar__sub-list js-sub-list">
                     <li >
-                    <a href="form.php">
-                        <i class="fas fa-check-square"></i>Registrar</a>
+                    <a href="form.php" style="color:white;">
+                        <i class="fas fa-check-square colo"></i>Registrar</a>
                     </li>
+
                     <li>
-                    <a href="usuarios.php">
-                        <i class="fas fa-user"></i>Tabla Usuarios</a>
-                    </li>   
+                    <a href="usuarios.php" style="color:white;">
+                        <i class="fas fa-user colo"></i>Tabla Usuarios</a>
+                    </li>
+              
                     </ul>
                 </li>
-              
+                <?php endif ?>
+                
                 <li>
-                    <a href="categorias.php">
-                        <i class="fas fa-anchor"></i>Categorias</a>
+                    <a href="categorias.php" style="color:white;">
+                        <i class="fas fa-anchor colo"></i>Categorias</a>
                 </li>
+                <?php if($user['rol_id'] == 1): ?>
                 <li>
-                    <a href="proveedores.php">
-                        <i class="fas fa-users"></i>Proveedor</a>
+                    <a href="proveedores.php" style="color:white;">
+                        <i class="fas fa-users colo"></i>Proveedor</a>
                 </li>
+                <?php endif ?>
                 <li>
-                    <a href="calendar.php">
-                        <i class="fas fa-calendar-alt"></i>Calendario</a>
+                    <a href="calendar.php"  style="color:white;">
+                        <i class="fas fa-calendar-alt colo"></i>Calendario</a>
                 </li>
                 <li class="has-sub">
-                    <a class="js-arrow" href="#">
-                        <i class="fas fa-glass"></i>Productos</a>
+                    <a class="js-arrow" href="#" style="color:white;">
+                        <i class="fas fa-glass colo"></i>Productos</a>
                     <ul class="list-unstyled navbar__sub-list js-sub-list">
                     <li>
-                    <a href="productos.php">
-                    <i class="fas fa-thumb-tack"></i>Principal</a>
+                    <a href="productos.php" style="color:white;">
+                    <i class="fas fa-thumb-tack colo"></i>Principal</a>
                 </li>
                     
                 <li>
-                    <a href="entradas.php?start=0">
-                    <i class="fas fa-truck"></i>Entradas</a>
+                    <a href="entradas.php?start=0" style="color:white;">
+                    <i class="fas fa-truck colo"></i>Entradas</a>
                 </li>  
-                <li>
-                    <a href="salidas.php">
-                    <i class="fas fa-shopping-cart"></i>Salidas</a>
+                <li >
+                    <a href="salidas.php"  style="color:white;">
+                    <i class="fas fa-shopping-cart colo"></i>Salidas</a>
                 </li>  
                     </ul>
                 </li>
@@ -151,7 +149,7 @@
 
 
     <!-- HEADER DESKTOP-->
-    <header class="header-desktop">
+    <header class="header-desktop" style="background-color:#090909;border-color:#090909;" >
         <div class="section__content section__content--p30">
             <div class="container-fluid">
                 <div class="header-wrap">
@@ -170,7 +168,7 @@
                                     <img src="uploads/users/<?= $user['imagen_url']?>" alt="John Doe" />
                                 </div>
                                 <div class="content">
-                                    <a class="js-acc-btn" href="#"><?php echo ucwords($user['nombres'] . " " . $user['apellidos']); ?></a>
+                                    <a class="js-acc-btn" style="color:white;" href="#"><?php echo ucwords($user['nombres'] . " " . $user['apellidos']); ?></a>
                                 </div>
                                 <div class="account-dropdown js-dropdown">
                                     <div class="info clearfix">
