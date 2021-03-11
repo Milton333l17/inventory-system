@@ -12,7 +12,7 @@ if(empty($errors)){
         $session->login($user_id);
             
         $session->msg("s", "Bienvenido!");
-        redirect('form.php',false);
+        redirect('index.php',false);
   }else{
     $session->msg("d", "Documento y/o contraseña incorrecto.".$user_id);
     redirect('login.php', false);

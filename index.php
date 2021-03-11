@@ -20,6 +20,11 @@ $countsql = $pdo->prepare("SELECT COUNT(id) FROM login_usuario ");
 $countsql->execute();
 $row = $countsql->fetch();
 $numbuser = $row[0];
+
+$countsql = $pdo->prepare("SELECT COUNT(id) FROM salida ");
+$countsql->execute();
+$row = $countsql->fetch();
+$numbsalidas = $row[0];
 ?>
                         <div class="row">
                             <div class="col-md-12">
@@ -55,7 +60,7 @@ $numbuser = $row[0];
                                                 <i class="zmdi zmdi-shopping-cart"></i>
                                             </div>
                                             <div class="text">
-                                                <h2>388,688</h2>
+                                                <h2><?= $numbsalidas ?></h2>
                                                 <span>N° Salidas</span>
                                             </div>
                                         </div>
